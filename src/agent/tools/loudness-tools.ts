@@ -13,12 +13,14 @@ type Args = Record<string, unknown>;
 
 const DEFAULT_TARGET_LUFS = -14;
 
-/** Target audio clip collection: given the itemId, only find that one (prefix matching), otherwise all audio clips on the timeline. */
+/** Target clip collection: given the itemId, only find that one (prefix matching), otherwise every
+ * video/audio clip on the timeline — dialogue is usually embedded in video clips (talking-head
+ * footage cut from multiple takes/locations), not just standalone audio tracks. */
 function findAudioItems(ctx: AgentContext, itemId: unknown) {
-  const audioItems = ctx.getState().items.filter((it) => it.kind === 'audio');
+  const candidates = ctx.getState().items.filter((it) => it.kind === 'audio' || it.kind === 'video');
   const q = itemId === undefined || itemId === null ? '' : String(itemId);
-  if (!q) return audioItems;
-  const match = audioItems.find((it) => it.id === q || it.id.startsWith(q));
+  if (!q) return candidates;
+  const match = candidates.find((it) => it.id === q || it.id.startsWith(q));
   return match ? [match] : [];
 }
 
@@ -29,8 +31,8 @@ export async function execLoudnessTool(name: string, args: Args, ctx: AgentConte
   const items = findAudioItems(ctx, args.itemId);
   if (items.length === 0) {
     return args.itemId
-      ? { error: `no audio clip ${args.itemId}` }
-      : { ok: true, normalized: [], target, note: 'timeline 上没有音频 clip' };
+      ? { error: `no video/audio clip ${args.itemId}` }
+      : { ok: true, normalized: [], target, note: 'timeline 上没有 video/audio clip' };
   }
 
   const normalized: { itemId: string; measuredLufs: number; gain: number }[] = [];

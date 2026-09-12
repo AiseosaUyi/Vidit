@@ -79,9 +79,12 @@ const ROUTING_GROUPS: readonly RoutingGroup[] = [
     tools: ['read_transcript', 'find_transcript', 'clean_script', 'edit_gap', 'delete_text', 'remove_silence'],
   },
   {
-    requestKeywords: ['audio', 'music', 'sound', 'loudness', 'bgm', '音频', '声音', '音乐', '音效', '响度', '背景音乐'],
+    requestKeywords: [
+      'audio', 'music', 'sound', 'loudness', 'bgm', 'noise', 'denoise', 'voice',
+      '音频', '声音', '音乐', '音效', '响度', '背景音乐', '降噪', '人声',
+    ],
     tools: [
-      'list_audio', 'add_audio', 'normalize_loudness', 'isolate_voice', 'detect_beats',
+      'list_audio', 'add_audio', 'normalize_loudness', 'isolate_voice', 'match_audio', 'detect_beats',
       'analyze_music', 'inspect_music', 'music_edit_plan', 'sync_cuts_to_music',
       'music_image_plan', 'sync_images_to_music',
     ],
