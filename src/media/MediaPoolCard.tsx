@@ -134,6 +134,12 @@ function previewable(asset: MediaAsset): boolean {
 
 export const MediaAssetCard = memo(function MediaAssetCard(props: MediaAssetCardProps) {
   const { asset, missing, onFocusChange, onPointerChange, view } = props;
+  // Single-click selection opens the asset menu, but a double-click must add
+  // to the timeline without that menu flashing open first: the menu open is
+  // deferred past the browser's double-click window, and the double-click
+  // handler cancels it before it fires.
+  const menuTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => { if (menuTimerRef.current) clearTimeout(menuTimerRef.current); }, []);
   return (
     <div
       data-cc-media-asset-id={asset.id}
@@ -158,15 +164,20 @@ export const MediaAssetCard = memo(function MediaAssetCard(props: MediaAssetCard
           props.onToggleSelected(asset.id);
           return;
         }
-        if (props.selected) {
-          props.onToggleSelected(asset.id);
-          props.onOpenMenu(asset.id, event.currentTarget as HTMLElement);
-        } else {
-          props.onSetSelected([asset.id]);
-          props.onOpenMenu(asset.id, event.currentTarget as HTMLElement);
-        }
+        const wasSelected = props.selected;
+        if (wasSelected) props.onToggleSelected(asset.id);
+        else props.onSetSelected([asset.id]);
+        const anchor = event.currentTarget as HTMLElement;
+        if (menuTimerRef.current) clearTimeout(menuTimerRef.current);
+        menuTimerRef.current = setTimeout(() => {
+          menuTimerRef.current = null;
+          props.onOpenMenu(asset.id, anchor);
+        }, 250);
       }}
-      onDoubleClick={() => { if (!missing && isTimelineMediaAssetKind(asset.kind)) props.onAdd(asset); }}
+      onDoubleClick={() => {
+        if (menuTimerRef.current) { clearTimeout(menuTimerRef.current); menuTimerRef.current = null; }
+        if (!missing && isTimelineMediaAssetKind(asset.kind)) props.onAdd(asset);
+      }}
       onContextMenu={(event) => {
         if (event.target instanceof Element && event.target.closest('[data-music-analysis-control]')) return;
         event.preventDefault();

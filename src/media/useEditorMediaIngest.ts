@@ -434,8 +434,8 @@ function useTimelineImports(
   }, [commands, getPlayhead]);
   const importToCanvas = useCallback(async (file: File, onProgress?: (ratio: number) => void) => {
     const asset = await importToPool(file, onProgress);
-    commands.addMediaItem(asset);
-  }, [commands, importToPool]);
+    commands.addMediaItem(asset, { startFrame: getPlayhead() });
+  }, [commands, getPlayhead, importToPool]);
   return { dropExternalFilesToTimeline, addMediaAssetsToTimeline, importToCanvas };
 }
 
