@@ -21,7 +21,25 @@ export type GlslTransitionType =
   | 'circle-wipe'
   | 'radial-blur'
   | 'glitch-cut'
-  | 'dip-to-color';
+  | 'dip-to-color'
+  | 'slide-wipe'
+  | 'push-swap'
+  | 'cube-rotate'
+  | 'card-flip'
+  | 'diamond-wipe'
+  | 'star-wipe'
+  | 'heart-wipe'
+  | 'light-leak'
+  | 'film-burn'
+  | 'kaleidoscope'
+  | 'mirror-slide'
+  | 'mosaic-dissolve'
+  | 'zoom-punch'
+  | 'datamosh'
+  | 'venetian-blinds'
+  | 'clock-wipe'
+  | 'checker-wipe'
+  | 'swirl-warp';
 
 /** Audio-only transitions (preset `trAudioCrossFade`) — no picture. */
 export type AudioTransitionType = 'audio-cross-fade';
@@ -35,6 +53,9 @@ export const GLSL_TRANSITION_TYPES: ReadonlySet<string> = new Set<string>([
   'cross-dissolve', 'dip-to-black', 'soft-wipe', 'whip-pan', 'flash', 'luma-blend',
   'page-curl', 'rack-focus', 'organic-dissolve', 'impact-shake', 'anticipation-zoom', 'clean-line-wipe',
   'circle-wipe', 'radial-blur', 'glitch-cut', 'dip-to-color',
+  'slide-wipe', 'push-swap', 'cube-rotate', 'card-flip', 'diamond-wipe', 'star-wipe', 'heart-wipe',
+  'light-leak', 'film-burn', 'kaleidoscope', 'mirror-slide', 'mosaic-dissolve', 'zoom-punch',
+  'datamosh', 'venetian-blinds', 'clock-wipe', 'checker-wipe', 'swirl-warp',
   'custom-shader', // takes the GL render path; frag comes from the item, not GLSL_TRANSITIONS
 ]);
 
@@ -73,6 +94,24 @@ export const TRANSITION_LABELS: Record<TransitionType, string> = {
   'radial-blur': '径向模糊转场',
   'glitch-cut': '故障切换转场',
   'dip-to-color': '闪色转场',
+  'slide-wipe': '滑动转场',
+  'push-swap': '推拉转场',
+  'cube-rotate': '立方体旋转转场',
+  'card-flip': '卡片翻转转场',
+  'diamond-wipe': '菱形擦除转场',
+  'star-wipe': '星形擦除转场',
+  'heart-wipe': '心形擦除转场',
+  'light-leak': '漏光转场',
+  'film-burn': '胶片灼烧转场',
+  kaleidoscope: '万花筒转场',
+  'mirror-slide': '镜像滑动转场',
+  'mosaic-dissolve': '马赛克溶解转场',
+  'zoom-punch': '冲击变焦转场',
+  datamosh: '数据故障转场',
+  'venetian-blinds': '百叶窗转场',
+  'clock-wipe': '时钟扫描转场',
+  'checker-wipe': '棋盘格转场',
+  'swirl-warp': '漩涡扭曲转场',
   /** preset.name.trAudioCrossFade */
   'audio-cross-fade': '音频交叉淡化',
   /** submit_shader-generated custom transition (per-item label in customLabel) */
@@ -97,6 +136,24 @@ export const TRANSITION_ORDER: readonly GlslTransitionType[] = [
   'radial-blur',
   'glitch-cut',
   'dip-to-color',
+  'slide-wipe',
+  'push-swap',
+  'cube-rotate',
+  'card-flip',
+  'diamond-wipe',
+  'star-wipe',
+  'heart-wipe',
+  'light-leak',
+  'film-burn',
+  'kaleidoscope',
+  'mirror-slide',
+  'mosaic-dissolve',
+  'zoom-punch',
+  'datamosh',
+  'venetian-blinds',
+  'clock-wipe',
+  'checker-wipe',
+  'swirl-warp',
 ];
 
 /** Audio transition catalog (trAudioCrossFade). */

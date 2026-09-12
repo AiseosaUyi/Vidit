@@ -28,11 +28,11 @@ export interface CaptionLayout {
 // edited (words deleted / silence compressed) the caption words are re-projected
 // onto the edited timeline (see retimeWords) — captions follow edits. If no item
 // is referenced, `words` + `offsetFrames` provide a standalone (sample) source.
-export type CaptionTemplate = 'plain' | 'black-bar' | 'persona' | 'off-the-wall' | 'the-french-dispatch' | 'dogme' | 'boyz-n-the-hood' | 'bubble-pop' | 'submagic' | 'story' | 'bili' | 'luxe' | 'noir' | 'atelier' | 'product' | 'signal' | 'studio' | 'white-card' | 'bold-outline' | 'deyi-card' | 'tiktok' | 'netflix';
+export type CaptionTemplate = 'plain' | 'black-bar' | 'persona' | 'off-the-wall' | 'the-french-dispatch' | 'dogme' | 'boyz-n-the-hood' | 'bubble-pop' | 'submagic' | 'story' | 'bili' | 'luxe' | 'noir' | 'atelier' | 'product' | 'signal' | 'studio' | 'white-card' | 'bold-outline' | 'deyi-card' | 'tiktok' | 'netflix' | 'mono-terminal' | 'typewriter-page' | 'meme-classic' | 'pastel-bubble' | 'gamer-neon' | 'highlighter-marker' | 'quote-serif' | 'condensed-sport';
 export type CaptionPacing = 'word' | 'phrase';
 
 /** Deterministic burn-in animation shared by Player preview and Remotion export. */
-export type CaptionMotionPreset = 'none' | 'fade-up' | 'pop' | 'word-pop' | 'karaoke-pulse';
+export type CaptionMotionPreset = 'none' | 'fade-up' | 'pop' | 'word-pop' | 'karaoke-pulse' | 'typewriter' | 'slide-in-word' | 'bounce-in-page' | 'shake-emphasis';
 
 /** One translated caption phrase, timed on the (edited) timeline in ms. */
 export interface TranslatedCue {

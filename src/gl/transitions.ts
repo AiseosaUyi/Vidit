@@ -20,6 +20,24 @@ import circleWipe from './shaders/circle-wipe.frag?raw';
 import radialBlur from './shaders/radial-blur.frag?raw';
 import glitchCut from './shaders/glitch-cut.frag?raw';
 import dipToColor from './shaders/dip-to-color.frag?raw';
+import slideWipe from './shaders/slide-wipe.frag?raw';
+import pushSwap from './shaders/push-swap.frag?raw';
+import cubeRotate from './shaders/cube-rotate.frag?raw';
+import cardFlip from './shaders/card-flip.frag?raw';
+import diamondWipe from './shaders/diamond-wipe.frag?raw';
+import starWipe from './shaders/star-wipe.frag?raw';
+import heartWipe from './shaders/heart-wipe.frag?raw';
+import lightLeak from './shaders/light-leak.frag?raw';
+import filmBurn from './shaders/film-burn.frag?raw';
+import kaleidoscope from './shaders/kaleidoscope.frag?raw';
+import mirrorSlide from './shaders/mirror-slide.frag?raw';
+import mosaicDissolve from './shaders/mosaic-dissolve.frag?raw';
+import zoomPunch from './shaders/zoom-punch.frag?raw';
+import datamosh from './shaders/datamosh.frag?raw';
+import venetianBlinds from './shaders/venetian-blinds.frag?raw';
+import clockWipe from './shaders/clock-wipe.frag?raw';
+import checkerWipe from './shaders/checker-wipe.frag?raw';
+import swirlWarp from './shaders/swirl-warp.frag?raw';
 
 export interface GlslTransitionDef {
   frag: string;
@@ -135,5 +153,85 @@ export const GLSL_TRANSITIONS: Record<GlslTransitionType, GlslTransitionDef> = {
       // short hold so PREVIEW_PROGRESS (~0.42) still shows outgoing + color blend
       u_hold: 0.12,
     }),
+  },
+  // ── CapCut-parity batch: slide/push/3D/shape-mask/light/glitch/specialty ──
+  'slide-wipe': {
+    frag: slideWipe,
+    uniforms: ({ direction }) => ({
+      u_dir: direction === 'right' ? [-1, 0] : direction === 'up' ? [0, -1] : direction === 'down' ? [0, 1] : [1, 0],
+    }),
+  },
+  'push-swap': {
+    frag: pushSwap,
+    uniforms: ({ direction }) => ({
+      u_dir: direction === 'right' ? [-1, 0] : direction === 'up' ? [0, -1] : direction === 'down' ? [0, 1] : [1, 0],
+    }),
+  },
+  'cube-rotate': {
+    frag: cubeRotate,
+    uniforms: () => ({}),
+  },
+  'card-flip': {
+    frag: cardFlip,
+    uniforms: () => ({}),
+  },
+  'diamond-wipe': {
+    frag: diamondWipe,
+    uniforms: () => ({ u_feather: 0.05, u_center: [0.5, 0.5] }),
+  },
+  'star-wipe': {
+    frag: starWipe,
+    uniforms: () => ({ u_feather: 0.04, u_center: [0.5, 0.5] }),
+  },
+  'heart-wipe': {
+    frag: heartWipe,
+    uniforms: () => ({ u_feather: 0.05, u_center: [0.5, 0.5] }),
+  },
+  'light-leak': {
+    frag: lightLeak,
+    uniforms: () => ({ u_leakColor: [1.0, 0.78, 0.45], u_intensity: 0.9 }),
+  },
+  'film-burn': {
+    frag: filmBurn,
+    uniforms: ({ time }) => ({ u_time: time, u_burnIntensity: 0.8 }),
+  },
+  kaleidoscope: {
+    frag: kaleidoscope,
+    uniforms: () => ({ u_segments: 8 }),
+  },
+  'mirror-slide': {
+    frag: mirrorSlide,
+    uniforms: () => ({}),
+  },
+  'mosaic-dissolve': {
+    frag: mosaicDissolve,
+    uniforms: () => ({}),
+  },
+  'zoom-punch': {
+    frag: zoomPunch,
+    uniforms: () => ({ u_punchAmount: 0.35 }),
+  },
+  datamosh: {
+    frag: datamosh,
+    uniforms: ({ time }) => ({ u_time: time, u_blockiness: 1 }),
+  },
+  'venetian-blinds': {
+    frag: venetianBlinds,
+    uniforms: ({ direction }) => ({
+      u_slats: 10,
+      u_vertical: direction === 'up' || direction === 'down' ? 0 : 1,
+    }),
+  },
+  'clock-wipe': {
+    frag: clockWipe,
+    uniforms: () => ({ u_center: [0.5, 0.5] }),
+  },
+  'checker-wipe': {
+    frag: checkerWipe,
+    uniforms: () => ({ u_squares: 12 }),
+  },
+  'swirl-warp': {
+    frag: swirlWarp,
+    uniforms: () => ({ u_swirlAmount: 2.4 }),
   },
 };

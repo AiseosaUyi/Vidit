@@ -50,7 +50,7 @@ export interface CaptionStyle {
 }
 
 // The first 9 presets follow PRD §4.17 (bundle only evidences "Bubble Pop" —
-// preset values are server-side); the other 12 presets are custom extensions.
+// preset values are server-side); the other 21 presets are custom extensions.
 // labelZh/hint are local UX.
 export const CAPTION_STYLES: CaptionStyle[] = [
   { id: 'plain', label: 'Plain', labelZh: '简洁白字', hint: '白字无底，适合口播', fontFamily: 'Inter', fontSize: .042, fontWeight: 400, color: '#fff', highlightColor: '#fff', strokeColor: '#000', strokeWidth: 0, textShadow: 'none' },
@@ -75,6 +75,14 @@ export const CAPTION_STYLES: CaptionStyle[] = [
   { id: 'product', label: 'Product Beam', labelZh: '产品绿标', hint: '青白字 + 荧光绿', fontFamily: 'Sora', fontSize: .038, fontWeight: 800, color: '#F7FFF9', highlightColor: '#071007', highlightBackground: '#A3FF12', strokeColor: '#000', strokeWidth: 0, textShadow: 'none' },
   { id: 'signal', label: 'Signal Flux', labelZh: '信号青', hint: '科技风青绿高亮', fontFamily: 'Unbounded', fontSize: .034, fontWeight: 800, color: '#EAFBFF', highlightColor: '#061016', highlightBackground: '#4DFFDF', strokeColor: '#000', strokeWidth: 0, textShadow: '0 0 6px #4dffdf2e,0 3px 10px #000b', textTransform: 'uppercase' },
   { id: 'deyi-card', label: 'Deyi Card', labelZh: '得意黑', hint: '中文展示字体', fontFamily: 'Smiley Sans', fontSize: .042, fontWeight: 400, color: '#fff', highlightColor: '#fff', strokeColor: '#000', strokeWidth: 0, textShadow: 'none' },
+  { id: 'mono-terminal', label: 'Mono Terminal', labelZh: '终端绿字', hint: '复古终端绿字，黑底高亮', fontFamily: 'VT323', fontSize: .05, fontWeight: 400, color: '#39FF88', highlightColor: '#0AFF6A', highlightBackground: '#0B1F12', strokeColor: '#000', strokeWidth: 0, textShadow: '0 0 8px #39ff8866' },
+  { id: 'typewriter-page', label: 'Typewriter Page', labelZh: '打字机信纸', hint: '打字机字体，米黄纸感', fontFamily: 'Special Elite', fontSize: .038, fontWeight: 400, color: '#F5E9D0', highlightColor: '#F5E9D0', strokeColor: '#000', strokeWidth: 0, textShadow: '1px 1px 2px #0008' },
+  { id: 'meme-classic', label: 'Meme Classic', labelZh: '经典表情包', hint: '超粗黑描边大白字', fontFamily: 'Anton', fontSize: .07, fontWeight: 400, color: '#fff', highlightColor: '#fff', strokeColor: '#000', strokeWidth: 9, textShadow: 'none', textTransform: 'uppercase' },
+  { id: 'pastel-bubble', label: 'Pastel Bubble', labelZh: '马卡龙气泡', hint: '圆润字体，粉彩高亮', fontFamily: 'Fredoka', fontSize: .045, fontWeight: 600, color: '#5B4B8A', highlightColor: '#3A2E5C', highlightBackground: '#FFC6E0', strokeColor: '#000', strokeWidth: 0, textShadow: 'none' },
+  { id: 'gamer-neon', label: 'Gamer Neon', labelZh: '游戏霓虹', hint: '直播感紫色高亮，全大写', fontFamily: 'Barlow Condensed', fontSize: .05, fontWeight: 800, color: '#F4F1FF', highlightColor: '#fff', highlightBackground: '#8B2FF7', strokeColor: '#1A0630', strokeWidth: 2, textShadow: '0 0 14px #8b2ff799', textTransform: 'uppercase' },
+  { id: 'highlighter-marker', label: 'Highlighter Marker', labelZh: '荧光标记', hint: '像荧光笔划重点', fontFamily: 'Nunito', fontSize: .042, fontWeight: 800, color: '#1B1B1B', highlightColor: '#1B1B1B', highlightBackground: '#FFEB3Bb3', strokeColor: '#fff', strokeWidth: 0, textShadow: 'none' },
+  { id: 'quote-serif', label: 'Quote Serif', labelZh: '衬线引言', hint: '斜体衬线，适合引用语', fontFamily: 'Libre Baskerville', fontSize: .036, fontWeight: 400, fontStyle: 'italic', color: '#F7F3E9', highlightColor: '#F7F3E9', strokeColor: '#000', strokeWidth: 0, textShadow: '0 2px 10px #000c' },
+  { id: 'condensed-sport', label: 'Condensed Sport', labelZh: '体育台标', hint: '窄体大写，转播下三分之一风格', fontFamily: 'Oswald', fontSize: .04, fontWeight: 700, color: '#fff', highlightColor: '#111', highlightBackground: '#FFD400', strokeColor: '#000', strokeWidth: 0, textShadow: 'none', textTransform: 'uppercase', wholeLine: true, background: '#111318e6' },
 ];
 
 export const CAPTION_STYLE_BY_ID = Object.fromEntries(CAPTION_STYLES.map((style) => [style.id, style])) as Record<CaptionTemplate, CaptionStyle>;
