@@ -1,0 +1,9 @@
+allowBuilds:
+  '@ffprobe-installer/darwin-arm64': true
+  electron-winstaller: true
+  esbuild: true
+  ffmpeg-static: true
+  koffi: true
+  onnxruntime-node: true
+  protobufjs: true
+  sharp: true
