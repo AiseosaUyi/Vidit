@@ -25,6 +25,15 @@ import { downloadModelFile, modelCacheDir } from './hf-proxy.ts';
 
 const MAX_JSON = 8 * 1024;
 
+// The ggml companion file is hosted on a separate repo from the ONNX model;
+// downloadModelFile() lays every file out at cacheDir/modelId/filePath, so
+// its on-disk location must always be derived from this same repo id rather
+// than a hand-picked directory name that can drift out of sync.
+const GGML_REPO_ID = 'ggerganov/whisper.cpp';
+function ggmlFilePath(cacheDir: string, fileName: string): string {
+  return join(cacheDir, GGML_REPO_ID, fileName);
+}
+
 const tasks = new Map<string, AsrDownloadTask>();
 const inspections = new Map<string, {
   fingerprint: string;
@@ -125,7 +134,7 @@ export async function inspectAsrModel(
   throwIfAborted(signal);
   const stats: string[] = [];
   const ggmlPath = entry.ggmlFile
-    ? join(cacheDir, 'ggml', entry.ggmlFile.fileName)
+    ? ggmlFilePath(cacheDir, entry.ggmlFile.fileName)
     : undefined;
   const checkedFiles: Array<{ path: string; sizeBytes: number; sha256: string }> = [
     ...entry.files.map((file) => ({
@@ -218,13 +227,13 @@ async function startDownload(id: string): Promise<AsrDownloadTask> {
         task.bytesDone += file.sizeBytes;
       }
       if (ggml) {
-        const ggmlPath = join(modelCacheDir(), 'ggml', ggml.fileName);
+        const ggmlPath = ggmlFilePath(modelCacheDir(), ggml.fileName);
         const ggmlFile = { path: ggmlPath, sizeBytes: ggml.sizeBytes, sha256: ggml.sha256 };
         if (!(await modelFileVerified(ggmlPath, ggmlFile))) {
           await rm(ggmlPath, { force: true });
           await downloadModelFile(
-            { modelId: 'ggerganov/whisper.cpp', revision: ggml.revision, filePath: ggml.fileName },
-            undefined,
+            { modelId: GGML_REPO_ID, revision: ggml.revision, filePath: ggml.fileName },
+            ggmlPath,
             { expectedBytes: ggml.sizeBytes, expectedSha256: ggml.sha256 },
           );
         }
@@ -247,7 +256,7 @@ async function deleteModel(id: string): Promise<boolean> {
   if (task?.status === 'downloading') throw new Error(`model ${id} is downloading`);
   await rm(join(modelCacheDir(), entry.modelId), { recursive: true, force: true });
   if (entry.ggmlFile) {
-    await rm(join(modelCacheDir(), 'ggml', entry.ggmlFile.fileName), { force: true });
+    await rm(ggmlFilePath(modelCacheDir(), entry.ggmlFile.fileName), { force: true });
   }
   tasks.delete(id);
   inspections.delete(`${modelCacheDir()}\0${entry.modelId}`);
