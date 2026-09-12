@@ -10,7 +10,7 @@ assert.equal(compositorPackageName('win32', 'x64'), '@remotion/compositor-win32-
 assert.equal(compositorPackageName('linux', 'x64'), '@remotion/compositor-linux-x64-gnu');
 assert.equal(compositorPackageName('linux', 'arm64'), '@remotion/compositor-linux-arm64-gnu');
 
-const root = await mkdtemp(join(tmpdir(), 'openchatcut-remotion-binaries-'));
+const root = await mkdtemp(join(tmpdir(), 'vidit-remotion-binaries-'));
 try {
   // Windows: the compositor's limited ffmpeg is swapped for the richer static build.
   const compositor = join(root, 'compositor');

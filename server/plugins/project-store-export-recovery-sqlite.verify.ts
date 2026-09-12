@@ -11,7 +11,7 @@ import {
 } from './project-store-export-recovery.ts';
 import { sqliteImmediateTransaction } from '../storage/sqlite-store.ts';
 
-const CHILD_MODE = process.env.OPENCHATCUT_EXPORT_RECOVERY_RACE_CHILD === '1';
+const CHILD_MODE = process.env.VIDIT_EXPORT_RECOVERY_RACE_CHILD === '1';
 const renderId = '11111111-1111-4111-8111-111111111111';
 const key = `export-recovery:${renderId}`;
 
@@ -72,14 +72,14 @@ function spawnChild(home: string): ChildProcess {
     env: {
       ...process.env,
       HOME: home,
-      OPENCHATCUT_EXPORT_RECOVERY_RACE_CHILD: '1',
+      VIDIT_EXPORT_RECOVERY_RACE_CHILD: '1',
     },
     stdio: ['ignore', 'inherit', 'inherit', 'ipc'],
   });
 }
 
 async function seedRecovery(home: string): Promise<void> {
-  const path = join(home, '.openchatcut', 'project-store-v1.sqlite3');
+  const path = join(home, '.vidit', 'project-store-v1.sqlite3');
   await mkdir(dirname(path), { recursive: true });
   const db = new DatabaseSync(path);
   db.exec('PRAGMA journal_mode = WAL; CREATE TABLE kv (k TEXT PRIMARY KEY, v TEXT NOT NULL);');
@@ -94,7 +94,7 @@ async function seedRecovery(home: string): Promise<void> {
 }
 
 async function runParent(): Promise<void> {
-  const home = await mkdtemp(join(tmpdir(), 'openchatcut-export-recovery-race-'));
+  const home = await mkdtemp(join(tmpdir(), 'vidit-export-recovery-race-'));
   const children: ChildProcess[] = [];
   try {
     await seedRecovery(home);

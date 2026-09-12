@@ -12,7 +12,7 @@ export interface SharedKvBackend {
   updateAgentRunLease(input: AgentRunLeaseRequest): Promise<ProjectStoreMutationResponse>;
 }
 
-const DB_NAME = 'openchatcut';
+const DB_NAME = 'vidit';
 const STORE = 'kv';
 const memoryStore = new Map<string, unknown>();
 export let injectedBackend: SharedKvBackend | undefined;

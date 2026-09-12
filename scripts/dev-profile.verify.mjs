@@ -11,7 +11,7 @@ import {
 
 const UUID_A = 'dddddddd-dddd-4ddd-8ddd-dddddddddddd';
 const UUID_B = 'eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee';
-const fixture = await mkdtemp(join(tmpdir(), 'openchatcut-dev-profile-'));
+const fixture = await mkdtemp(join(tmpdir(), 'vidit-dev-profile-'));
 
 async function fixturePaths(name) {
   const root = join(fixture, name);
@@ -41,7 +41,7 @@ try {
   const reused = await loadOrCreateDevProfile({ ...stablePaths, randomId: () => UUID_B });
   assert.equal(first.id, UUID_A);
   assert.deepEqual(reused, first);
-  assert.equal(first.rootDir, join(stablePaths.homeDir, '.openchatcut', 'dev-profiles', UUID_A));
+  assert.equal(first.rootDir, join(stablePaths.homeDir, '.vidit', 'dev-profiles', UUID_A));
   assert.deepEqual(
     JSON.parse(await readFile(join(stablePaths.gitDir, DEV_PROFILE_METADATA), 'utf8')),
     { version: 1, profileId: UUID_A, repoRoot: stablePaths.repoRoot },
@@ -54,7 +54,7 @@ try {
   const childEnvironment = await profileChildEnvironment(first, {
     OPENAI_API_KEY: 'checkout-secret',
     UNRELATED: 'inherited',
-    OPENCHATCUT_DEV_PROFILE_ID: UUID_B,
+    VIDIT_DEV_PROFILE_ID: UUID_B,
     ASSEMBLYAI_API_KEY: 'checkout-transcription-secret',
   });
   assert.equal(childEnvironment.OPENAI_API_KEY, 'profile#secret');
@@ -62,7 +62,7 @@ try {
   assert.equal(childEnvironment.UNRELATED, 'inherited');
   assert.equal(childEnvironment.ASSEMBLYAI_API_KEY, '',
     'an isolated empty-value tombstone must suppress an inherited checkout secret');
-  assert.equal(childEnvironment.OPENCHATCUT_DEV_PROFILE_ID, UUID_A);
+  assert.equal(childEnvironment.VIDIT_DEV_PROFILE_ID, UUID_A);
 
   const shellExecutable = join(fixture, 'headless-shell');
   await writeFile(shellExecutable, 'test shell', { mode: 0o755 });

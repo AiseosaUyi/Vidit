@@ -14,7 +14,7 @@ import {
 // This verifier exercises the JSON-file persistence path and runs against the
 // real HOME; force the SQLite backend off so a migrated machine cannot change
 // its semantics (sqliteStoreEnabled: explicit env != '1' disables).
-process.env.OPENCHATCUT_SQLITE_STORE = '0';
+process.env.VIDIT_SQLITE_STORE = '0';
 
 const fixture = await setupGenerationJobsFixture();
 

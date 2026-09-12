@@ -133,7 +133,7 @@ async function checkConcurrentPublication(): Promise<void> {
 }
 
 try {
-  seedKeystore({ OPENCHATCUT_SKILLS_DIR: installed });
+  seedKeystore({ VIDIT_SKILLS_DIR: installed });
   mockApi();
   const result = await installGitHubSkill('fixtures/skill');
   assert.equal(result.source, 'api');

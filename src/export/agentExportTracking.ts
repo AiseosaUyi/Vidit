@@ -117,7 +117,7 @@ function mediaAssetFor(
     width: promoted.width,
     height: promoted.height,
     props: {
-      openchatcutDerivedFrom: {
+      viditDerivedFrom: {
         kind: 'sequence-export',
         timelineId: plan.timelineId,
         timelineName: plan.timelineName,

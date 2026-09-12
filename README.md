@@ -1,8 +1,13 @@
 <p align="center">
-  <img src="public/openchatcut-icon.png" width="96" alt="OpenChatCut" />
+  <img src="public/vidit-icon.png" width="96" alt="Vidit" />
 </p>
 
-<h1 align="center">OpenChatCut</h1>
+<h1 align="center">Vidit</h1>
+
+<p align="center">
+  A personal fork of <a href="https://github.com/0xsline/OpenChatCut">OpenChatCut</a>. The rest of this document
+  still refers to the upstream project by its original name where that's what a section is actually describing.
+</p>
 
 <p align="center">
   <a href="README_ZH.md">简体中文</a> · <strong>English</strong>

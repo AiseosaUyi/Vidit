@@ -296,7 +296,7 @@ for (const [names, load] of EXECUTOR_GROUPS) {
 
 
 // Low-level dispatch only. Every runtime caller must pass the active schema and
-// validated args through executeOpenChatCutTool (or the shared invocation validator).
+// validated args through executeViditTool (or the shared invocation validator).
 export async function executeTool(
   name: string,
   args: Args,

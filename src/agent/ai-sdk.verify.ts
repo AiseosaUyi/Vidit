@@ -142,7 +142,7 @@ globalThis.fetch = async (input, init) => {
   serialized.push({
     url,
     body: JSON.parse(String(init?.body ?? '{}')) as Record<string, unknown>,
-    provider: headers.get('x-openchatcut-provider'),
+    provider: headers.get('x-vidit-provider'),
   });
   return new Response(JSON.stringify({
     type: 'error',
@@ -747,7 +747,7 @@ const sdkToolFailure = await generateText({
 assert.equal(
   sdkToolFailure.steps[0]?.content.some((part) => part.type === 'tool-error'),
   true,
-  'AI SDK must preserve rejected OpenChatCut results as tool-error parts',
+  'AI SDK must preserve rejected Vidit results as tool-error parts',
 );
 
 const apiContext: AgentContext = {

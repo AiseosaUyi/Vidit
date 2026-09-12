@@ -17,7 +17,7 @@ const mm = validateVoiceRequest({
   channel: 2,
   languageBoost: 'Chinese',
   textNormalization: true,
-  pronunciations: ['OpenChatCut/(open chat cut)'],
+  pronunciations: ['Vidit/(open chat cut)'],
   timbreWeights: [{ voiceId: 'female-yujie', weight: 70 }, { voiceId: 'female-shaonv', weight: 30 }],
   voiceModify: { pitch: 10, intensity: -10, effect: 'robotic' },
   subtitleEnable: true,
@@ -155,7 +155,7 @@ const aiOptions: VoiceOptions = {
 };
 const openAiRequest = validateVoiceRequest({
   provider: 'openai',
-  text: 'Hello from OpenChatCut',
+  text: 'Hello from Vidit',
   voiceId: 'alloy',
   instructions: 'Speak calmly',
   speed: 1.1,

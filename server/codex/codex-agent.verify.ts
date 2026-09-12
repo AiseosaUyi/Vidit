@@ -180,7 +180,7 @@ lines.on('line', (line) => {
 });
 `;
 
-const directory = await mkdtemp(join(tmpdir(), 'openchatcut-codex-verify-'));
+const directory = await mkdtemp(join(tmpdir(), 'vidit-codex-verify-'));
 const scriptPath = join(directory, 'fake-app-server.mjs');
 const previousOpenAiKey = process.env.OPENAI_API_KEY;
 const previousAccessToken = process.env.CODEX_ACCESS_TOKEN;
@@ -237,7 +237,7 @@ try {
   const events: CodexTurnStreamEvent[] = [];
   await manager.run(client, {
     requestId: 'request-1',
-    system: 'Use OpenChatCut tools.',
+    system: 'Use Vidit tools.',
     prompt: 'Read the current project.',
     projectId: 'project-1',
     model: 'gpt-5.4',
@@ -269,7 +269,7 @@ try {
     callId: 'rejected:request-1:1',
     name: 'google_drive_search',
     args: { query: 'private files' },
-    result: { error: 'This OpenChatCut tool call is unavailable. It was not part of this request (stale tool list, duplicate call, or malformed id). Tell the user to open the project and retry; if it persists, start a new run.' },
+    result: { error: 'This Vidit tool call is unavailable. It was not part of this request (stale tool list, duplicate call, or malformed id). Tell the user to open the project and retry; if it persists, start a new run.' },
     success: false,
   });
   assert.deepEqual(events.find((event) => event.type === 'context-usage'), {

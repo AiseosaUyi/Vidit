@@ -96,7 +96,7 @@ const renamedPlaceholder: MediaAsset = {
   id: 'asset_placeholder',
   name: 'Renamed copy.mov',
   sourceFilename: 'Renamed copy.mov',
-  src: 'blob:https://openchatcut.local/renamed-copy',
+  src: 'blob:https://vidit.local/renamed-copy',
 };
 const sameNameDifferentBytes: MediaAsset = {
   ...poolCanonical,

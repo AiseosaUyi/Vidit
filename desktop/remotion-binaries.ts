@@ -6,7 +6,7 @@ import { ffmpegBin } from '../server/media-binaries.ts';
 
 const require = createRequire(import.meta.url);
 const DIRECTORY_PREFIX = 'remotion-binaries-';
-const READY_MARKER = '.openchatcut-ready';
+const READY_MARKER = '.vidit-ready';
 
 interface RemotionBinariesOptions {
   userDataPath: string;

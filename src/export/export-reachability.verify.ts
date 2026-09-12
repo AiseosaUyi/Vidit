@@ -36,8 +36,8 @@ async function main(): Promise<void> {
   const previousHome = process.env.HOME;
   process.env.HOME = root;
   try {
-    // Real media on disk: /media/uploads maps to <root>/.openchatcut/media/uploads.
-    const uploads = join(root, '.openchatcut', 'media', 'uploads');
+    // Real media on disk: /media/uploads maps to <root>/.vidit/media/uploads.
+    const uploads = join(root, '.vidit', 'media', 'uploads');
     mkdirSync(uploads, { recursive: true });
     writeFileSync(join(uploads, 'main-clip.mp4'), Buffer.from('fakemp4'));
     writeFileSync(join(uploads, 'music-bed.mp3'), Buffer.from('fakemp3'));

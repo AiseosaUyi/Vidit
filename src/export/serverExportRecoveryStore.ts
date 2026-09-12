@@ -5,7 +5,7 @@ import type {
   ExportDestination,
 } from './exportDestination';
 
-const DATABASE_NAME = 'openchatcut-server-export-recovery';
+const DATABASE_NAME = 'vidit-server-export-recovery';
 const STORE_NAME = 'jobs';
 const memoryJobs = new Map<string, PersistedServerExportJob>();
 

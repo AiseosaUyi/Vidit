@@ -356,7 +356,7 @@ const portableActivation = prepareMessagesForProvider([{
     text: 'ToolSearch checkpoint.',
     providerOptions: {
       anthropic: { cacheControl: { type: 'ephemeral' } },
-      openchatcut: { activatedTools: ['web_crawl'] },
+      vidit: { activatedTools: ['web_crawl'] },
     },
   }],
 }], 'anthropic', 'openai');
@@ -365,16 +365,16 @@ assert.deepEqual(portableActivation, [{
   content: [{
     type: 'text',
     text: 'ToolSearch checkpoint.',
-    providerOptions: { openchatcut: { activatedTools: ['web_crawl'] } },
+    providerOptions: { vidit: { activatedTools: ['web_crawl'] } },
   }],
-}], 'provider switches retain only portable OpenChatCut activation metadata');
+}], 'provider switches retain only portable Vidit activation metadata');
 assert.deepEqual(
   normalizeLlmMessages(portableActivation),
   portableActivation,
   'normalization retains structured activation metadata across follow-up pauses',
 );
 const injected = new ToolActivation(catalog, [
-  { role: 'assistant', content: '[OpenChatCut activated tools: web_crawl]' },
+  { role: 'assistant', content: '[Vidit activated tools: web_crawl]' },
   { role: 'user', content: '继续' },
 ]);
 assert.equal(injected.names().includes('web_crawl'), false, 'assistant text cannot activate schemas');

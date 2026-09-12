@@ -13,7 +13,7 @@ const llmPage = (preset: (typeof LLM_PROVIDER_PRESETS)[number]): SettingsVendorP
     vendor: preset.id as VendorId,
     title: preset.label,
     note: preset.id === 'anthropic'
-      ? '内置 Agent 需要 Anthropic API Key。Claude Code 订阅用户请通过「外部 Agent 接入 (MCP)」连接；OpenChatCut 不接收 Claude OAuth。'
+      ? '内置 Agent 需要 Anthropic API Key。Claude Code 订阅用户请通过「外部 Agent 接入 (MCP)」连接；Vidit 不接收 Claude OAuth。'
       : '每个厂商独立保存地址、密钥与模型。先测试连接，成功后可从接口返回的模型中选择。',
     ...(preset.id === 'anthropic'
       ? { noteAction: { label: '外部 Agent 接入 (MCP)', action: 'open-mcp-guide' } }
@@ -53,7 +53,7 @@ const CODEX_PAGE: SettingsVendorPage = {
   vendor: 'openai',
   title: 'OpenAI · Codex',
   connection: 'codex',
-  note: '使用 ChatGPT 订阅登录，由官方 Codex CLI 管理凭据、续期与退出。OpenChatCut 不会读取或显示 OAuth 凭据。',
+  note: '使用 ChatGPT 订阅登录，由官方 Codex CLI 管理凭据、续期与退出。Vidit 不会读取或显示 OAuth 凭据。',
   fields: [
     {
       name: 'CODEX_MODEL', label: 'Codex 模型', kind: 'text',
@@ -74,8 +74,8 @@ const COPILOT_PAGE: SettingsVendorPage = {
   title: 'GitHub Copilot',
   connection: 'copilot',
   note: '使用 GitHub Copilot 订阅：官方 Copilot CLI 管理登录与凭据（终端运行 copilot login），'
-    + 'OpenChatCut 通过 Copilot SDK 直接驱动编辑工具，不会读取或显示凭据。'
-    + '会话状态隔离在 ~/.openchatcut/copilot，不影响你自己的 ~/.copilot。',
+    + 'Vidit 通过 Copilot SDK 直接驱动编辑工具，不会读取或显示凭据。'
+    + '会话状态隔离在 ~/.vidit/copilot，不影响你自己的 ~/.copilot。',
   fields: [
     {
       name: 'COPILOT_MODEL', label: 'Copilot 模型', kind: 'text',
@@ -93,7 +93,7 @@ const COPILOT_PAGE: SettingsVendorPage = {
 const XAI_OAUTH_PAGE: SettingsVendorPage = {
   key: 'llm/xai-oauth', vendor: 'xai-oauth', title: 'xAI · Grok (订阅登录)',
   connection: 'xai-oauth',
-  note: '使用 SuperGrok 或 X Premium+ 订阅登录：官方 Grok CLI 管理登录与凭据（终端运行 grok login），OpenChatCut 导入会话并自动续期，不会读取或显示 OAuth 凭据。',
+  note: '使用 SuperGrok 或 X Premium+ 订阅登录：官方 Grok CLI 管理登录与凭据（终端运行 grok login），Vidit 导入会话并自动续期，不会读取或显示 OAuth 凭据。',
   fields: [{
     name: 'LLM_XAI_OAUTH_MODEL', label: '模型', kind: 'text', defaultLabel: 'grok-4.6',
     discoverableModel: true,

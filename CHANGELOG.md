@@ -1,5 +1,10 @@
 # Changelog / 更新日志
 
+Vidit is a personal fork of [OpenChatCut](https://github.com/0xsline/OpenChatCut). The entries below predate the
+fork and describe upstream OpenChatCut releases as originally recorded; they are kept as-is for historical accuracy.  
+Vidit 是 [OpenChatCut](https://github.com/0xsline/OpenChatCut) 的个人分支项目。以下条目产生于分支之前，按上游
+OpenChatCut 发布时的原始记录保留，以保证历史准确性。
+
 All notable changes to OpenChatCut are documented here.  
 OpenChatCut 的重要变更记录在此。
 

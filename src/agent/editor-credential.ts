@@ -1,7 +1,7 @@
 import type { EditorBootstrapInfo } from '../../shared/editor-auth-transport';
 import { fetchWithEditorSession } from '../persist/projectStoreTransport';
 
-export const EDITOR_BOOTSTRAP_HEADER = 'X-OpenChatCut-Editor-Bootstrap';
+export const EDITOR_BOOTSTRAP_HEADER = 'X-Vidit-Editor-Bootstrap';
 
 let cached: EditorBootstrapInfo | null = null;
 let pending: Promise<EditorBootstrapInfo> | null = null;
@@ -9,9 +9,9 @@ let pending: Promise<EditorBootstrapInfo> | null = null;
 async function requestEditorBootstrap(signal?: AbortSignal): Promise<EditorBootstrapInfo> {
   let value: unknown;
   const desktopWindow = typeof window === 'undefined' ? undefined : window as typeof window & {
-    openChatCutDesktop?: { editorCredentials?: () => Promise<EditorBootstrapInfo> };
+    viditDesktop?: { editorCredentials?: () => Promise<EditorBootstrapInfo> };
   };
-  const desktop = desktopWindow?.openChatCutDesktop?.editorCredentials;
+  const desktop = desktopWindow?.viditDesktop?.editorCredentials;
   if (desktop) {
     value = await desktop();
   } else {

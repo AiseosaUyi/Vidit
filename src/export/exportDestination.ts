@@ -63,7 +63,7 @@ function pickerFunction(): ((options: { mode: 'readwrite' }) => Promise<BrowserE
 }
 
 export async function restoreExportDestination(): Promise<ExportDestination> {
-  const desktop = window.openChatCutDesktop;
+  const desktop = window.viditDesktop;
   if (desktop) {
     const restored = desktopDestination(await desktop.restoreExportDirectory());
     return restored ?? DEFAULT_EXPORT_DESTINATION;
@@ -74,7 +74,7 @@ export async function restoreExportDestination(): Promise<ExportDestination> {
 export async function chooseExportDestination(
   suggestedFilename?: string,
 ): Promise<ExportDestination | null> {
-  const desktop = window.openChatCutDesktop;
+  const desktop = window.viditDesktop;
   if (desktop) {
     const selected = suggestedFilename
       ? await desktop.selectExportFile(checkedFilename(suggestedFilename))
@@ -161,7 +161,7 @@ async function putDesktopBody(
   signal?.throwIfAborted();
   const init: RequestInit & { duplex?: 'half' } = {
     method: 'PUT', body, signal,
-    ...(sourcePath ? { headers: { 'X-OpenChatCut-Export-Source': sourcePath } } : {}),
+    ...(sourcePath ? { headers: { 'X-Vidit-Export-Source': sourcePath } } : {}),
   };
   if (body instanceof ReadableStream) init.duplex = 'half';
   const endpoint = `/api/export-destinations/${encodeURIComponent(destination.grantId)}/${encodeURIComponent(filename)}`;

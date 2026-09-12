@@ -7,7 +7,7 @@ import {
   projectMcpToolExposure,
   requestedMcpToolExposure,
 } from './mcp-tool-exposure.ts';
-const controls = { openchatcut_status: true } as const;
+const controls = { vidit_status: true } as const;
 
 assert.equal(requestedMcpToolExposure({
   url: '/api/external-mcp/mcp',
@@ -19,10 +19,10 @@ assert.equal(requestedMcpToolExposure({
 } as never), 'progressive');
 assert.equal(requestedMcpToolExposure({
   url: '/api/external-mcp/mcp',
-  headers: { 'x-openchatcut-tool-exposure': 'progressive' },
+  headers: { 'x-vidit-tool-exposure': 'progressive' },
 } as never), 'progressive');
 const catalog: Tool[] = [
-  { name: 'openchatcut_status', inputSchema: { type: 'object' } },
+  { name: 'vidit_status', inputSchema: { type: 'object' } },
   { name: 'ToolSearch', inputSchema: { type: 'object' } },
   { name: 'load_skill', inputSchema: { type: 'object' } },
   { name: 'read_project', inputSchema: { type: 'object' } },
@@ -36,7 +36,7 @@ assert.deepEqual(projectMcpToolExposure(full, catalog, controls), catalog);
 const first = initialMcpToolExposure('progressive');
 assert.deepEqual(
   projectMcpToolExposure(first, catalog, controls).map((tool) => tool.name),
-  ['openchatcut_status', 'ToolSearch', 'load_skill', 'read_project'],
+  ['vidit_status', 'ToolSearch', 'load_skill', 'read_project'],
 );
 const searched = activateMcpToolExposure(first, 'ToolSearch', {
   results: [{ name: 'submit_export' }, { name: 'not_a_tool' }],

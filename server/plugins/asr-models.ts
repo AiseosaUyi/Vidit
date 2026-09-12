@@ -306,7 +306,7 @@ export async function handleAsrModelsRequest(
 
 export function asrModelsPlugin(): Plugin {
   return {
-    name: 'openchatcut-asr-models',
+    name: 'vidit-asr-models',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         const pathname = (req.url ?? '').split('?')[0] ?? '';

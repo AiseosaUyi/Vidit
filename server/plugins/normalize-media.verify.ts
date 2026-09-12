@@ -101,7 +101,7 @@ const restoreEnv = (name: string, value: string | undefined) => {
   if (value === undefined) delete process.env[name];
   else process.env[name] = value;
 };
-const testDir = await mkdtemp(join(tmpdir(), 'openchatcut-ingest-policy-'));
+const testDir = await mkdtemp(join(tmpdir(), 'vidit-ingest-policy-'));
 let server: ViteDevServer | undefined;
 let releaseEncoderGate: (() => void) | undefined;
 try {

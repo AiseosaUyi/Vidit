@@ -1,4 +1,4 @@
-# OpenChatCut UI & Features
+# Vidit UI & Features
 
 ## Project Entry & Dashboard
 

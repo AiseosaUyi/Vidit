@@ -57,7 +57,7 @@ function providerOptions(provider: LlmProvider): ProviderOptions {
   return {
     baseURL: PROXY_API_BASE,
     apiKey: PROXY_KEY,
-    headers: { 'x-openchatcut-provider': provider },
+    headers: { 'x-vidit-provider': provider },
   };
 }
 

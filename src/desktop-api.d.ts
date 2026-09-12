@@ -58,7 +58,7 @@ interface DesktopInferenceApi {
 
 declare global {
   interface Window {
-    openChatCutDesktop?: {
+    viditDesktop?: {
       getPathForFile(file: File): string | undefined;
       platform: NodeJS.Platform;
       selectDirectory(defaultPath?: string): Promise<string | null>;

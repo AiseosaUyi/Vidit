@@ -4,11 +4,11 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-const skillRoot = resolve(root, 'skills/openchatcut');
+const skillRoot = resolve(root, 'skills/vidit');
 const skillPath = resolve(skillRoot, 'SKILL.md');
 const skill = readFileSync(skillPath, 'utf8').replace(/\r\n?/g, '\n');
 
-assert.match(skill, /^---\nname: openchatcut\ndescription: .+\n---/);
+assert.match(skill, /^---\nname: vidit\ndescription: .+\n---/);
 assert.ok(skill.split('\n').length <= 500, 'SKILL.md must stay within 500 lines');
 
 const references = [...skill.matchAll(/`(references\/[^`]+\.md)`/g)].map((match) => match[1]);
@@ -19,7 +19,7 @@ for (const reference of references) {
 
 const skillVersion = /## Skill version\s+\n`([^`]+)`/.exec(skill)?.[1];
 const mcp = readFileSync(resolve(root, 'server/external-agent/mcp.ts'), 'utf8');
-const serverBaseline = /OPENCHATCUT_SKILL_BASELINE = '([^']+)'/.exec(mcp)?.[1];
+const serverBaseline = /VIDIT_SKILL_BASELINE = '([^']+)'/.exec(mcp)?.[1];
 assert.equal(skillVersion, serverBaseline, 'skill version must match the MCP baseline');
 const knownErrors = readFileSync(resolve(skillRoot, 'references/known-errors.md'), 'utf8');
 assert.match(knownErrors, /`list_edit_sessions`/);

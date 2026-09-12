@@ -134,7 +134,7 @@ try {
     type: 'text',
     text: 'I need one choice before editing.\n\n<widget><form-text id="style" label="Which editing style?"/></widget>',
     providerOptions: {
-      openchatcut: { activatedTools: ['ask_followup_questions'] },
+      vidit: { activatedTools: ['ask_followup_questions'] },
     },
   }]);
   assert.ok(JSON.stringify(result).includes('__followup'),
@@ -368,7 +368,7 @@ globalThis.fetch = (async (input) => {
       callId: 'rejected:request:1',
       name: 'unknown_tool',
       args: { value: 1 },
-      result: { error: 'This OpenChatCut tool call is unavailable.' },
+      result: { error: 'This Vidit tool call is unavailable.' },
       success: false,
     },
     { type: 'done' },

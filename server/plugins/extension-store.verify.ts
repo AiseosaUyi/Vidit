@@ -39,10 +39,10 @@ async function createHarness(rootDir: string) {
   };
 }
 
-const rootDir = await mkdtemp(join(tmpdir(), 'openchatcut-extensions-'));
+const rootDir = await mkdtemp(join(tmpdir(), 'vidit-extensions-'));
 const harness = await createHarness(rootDir);
 const pack = {
-  format: 'openchatcut-plugin@1',
+  format: 'vidit-plugin@1',
   id: 'demo-pack',
   name: 'Demo Pack',
   version: '..',

@@ -18,9 +18,9 @@ async function main(): Promise<void> {
     assert.equal(cursor.ok, true);
     assert.deepEqual(cursor.paths, ['~/.cursor/mcp.json']);
     const cursorConfig = JSON.parse(await readFile(path.join(home, '.cursor/mcp.json'), 'utf8'));
-    assert.equal(cursorConfig.mcpServers.openchatcut.type, 'http');
-    assert.equal(cursorConfig.mcpServers.openchatcut.url, ENDPOINT);
-    assert.equal(cursorConfig.mcpServers.openchatcut.headers.Authorization, `Bearer ${TOKEN}`);
+    assert.equal(cursorConfig.mcpServers.vidit.type, 'http');
+    assert.equal(cursorConfig.mcpServers.vidit.url, ENDPOINT);
+    assert.equal(cursorConfig.mcpServers.vidit.headers.Authorization, `Bearer ${TOKEN}`);
 
     // 2. Idempotent reconnect and existing-server preservation.
     await writeFile(
@@ -31,7 +31,7 @@ async function main(): Promise<void> {
     assert.equal(again.ok, true);
     const merged = JSON.parse(await readFile(path.join(home, '.cursor/mcp.json'), 'utf8'));
     assert.equal(merged.mcpServers.other.command, 'other', 'existing server preserved');
-    assert.equal(merged.mcpServers.openchatcut.url, ENDPOINT, 'openchatcut rewritten');
+    assert.equal(merged.mcpServers.vidit.url, ENDPOINT, 'vidit rewritten');
 
     // 3. Invalid JSON is refused without touching the file.
     await writeFile(path.join(home, '.cursor/mcp.json'), '{broken');
@@ -50,15 +50,15 @@ async function main(): Promise<void> {
     assert.equal(ag.ok, true);
     const agConfig = JSON.parse(await readFile(path.join(home, '.gemini/antigravity/mcp_config.json'), 'utf8'));
     assert.equal(agConfig.mcpServers.keep.httpUrl, 'http://x');
-    assert.equal(agConfig.mcpServers.openchatcut.httpUrl, ENDPOINT);
-    assert.equal(agConfig.mcpServers.openchatcut.headers.Authorization, `Bearer ${TOKEN}`);
+    assert.equal(agConfig.mcpServers.vidit.httpUrl, ENDPOINT);
+    assert.equal(agConfig.mcpServers.vidit.headers.Authorization, `Bearer ${TOKEN}`);
 
     // 5. Claude: creates ~/.claude.json with a user-scope mcpServers entry.
     const claude = await connectExternalClient('claude', ENDPOINT, TOKEN, { baseDir: home });
     assert.equal(claude.ok, true);
     const claudeConfig = JSON.parse(await readFile(path.join(home, '.claude.json'), 'utf8'));
-    assert.equal(claudeConfig.mcpServers.openchatcut.type, 'http');
-    assert.equal(claudeConfig.mcpServers.openchatcut.url, ENDPOINT);
+    assert.equal(claudeConfig.mcpServers.vidit.type, 'http');
+    assert.equal(claudeConfig.mcpServers.vidit.url, ENDPOINT);
 
     // 6. Codex: stub CLI must receive the right args; .zshrc export is added,
     //    then updated (not duplicated) when the token changes.
@@ -74,15 +74,15 @@ async function main(): Promise<void> {
     const stubArgs = (await readFile(path.join(home, '.codex/stub-args'), 'utf8')).trim();
     assert.equal(
       stubArgs,
-      `mcp add openchatcut --url ${ENDPOINT} --bearer-token-env-var OPENCHATCUT_MCP_TOKEN`,
+      `mcp add vidit --url ${ENDPOINT} --bearer-token-env-var VIDIT_MCP_TOKEN`,
     );
     const zshrcFirst = await readFile(path.join(home, '.zshrc'), 'utf8');
-    assert.match(zshrcFirst, /# OpenChatCut MCP token \(added by OpenChatCut\)\nexport OPENCHATCUT_MCP_TOKEN='tok_AbC123-_xyz'\n$/);
+    assert.match(zshrcFirst, /# Vidit MCP token \(added by Vidit\)\nexport VIDIT_MCP_TOKEN='tok_AbC123-_xyz'\n$/);
     const rotated = await connectExternalClient('codex', ENDPOINT, 'tok_NEW456', { baseDir: home, codexBin: stub });
     assert.equal(rotated.ok, true);
     const zshrcSecond = await readFile(path.join(home, '.zshrc'), 'utf8');
-    assert.match(zshrcSecond, /export OPENCHATCUT_MCP_TOKEN='tok_NEW456'/);
-    assert.equal((zshrcSecond.match(/OPENCHATCUT_MCP_TOKEN=/g) ?? []).length, 1, 'no duplicate export');
+    assert.match(zshrcSecond, /export VIDIT_MCP_TOKEN='tok_NEW456'/);
+    assert.equal((zshrcSecond.match(/VIDIT_MCP_TOKEN=/g) ?? []).length, 1, 'no duplicate export');
 
     // 7. Codex CLI failure surfaces as codex-cli-failed.
     const failStub = path.join(stubDir, 'codex-fail');

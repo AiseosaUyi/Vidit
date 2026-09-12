@@ -25,7 +25,7 @@ export interface StoredEntryValue {
   value?: unknown;
 }
 
-export const SQLITE_STORE_ENV = 'OPENCHATCUT_SQLITE_STORE';
+export const SQLITE_STORE_ENV = 'VIDIT_SQLITE_STORE';
 
 export type SQLiteMigrationPhase = 'legacy' | 'migrating' | 'complete' | 'failed';
 
@@ -96,7 +96,7 @@ function authoritativeReceipt(): ImportReceipt | null {
 }
 
 /**
- * Synchronous hot-path authority check. OPENCHATCUT_SQLITE_STORE=1 requests
+ * Synchronous hot-path authority check. VIDIT_SQLITE_STORE=1 requests
  * initialization but cannot expose an incomplete database.
  */
 export function sqliteStoreEnabled(): boolean {

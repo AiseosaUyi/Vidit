@@ -1,14 +1,14 @@
-# OpenChatCut MCP recovery
+# Vidit MCP recovery
 
 ## Connection refused
 
-OpenChatCut is closed, the configured URL is stale, or desktop port 5199 fell
+Vidit is closed, the configured URL is stale, or desktop port 5199 fell
 back to another port.
 
-1. Start OpenChatCut.
+1. Start Vidit.
 2. Read the endpoint from **Settings → MCP** or the startup log.
-3. Update the single `openchatcut` MCP entry.
-4. Call `openchatcut_status` again.
+3. Update the single `vidit` MCP entry.
+4. Call `vidit_status` again.
 
 ## Projects exist but no editor is connected
 
@@ -19,7 +19,7 @@ tools require the target project to be open.
 ## Tool missing
 
 The editor registers project tools after its bridge connects. Open the target
-project, call `openchatcut_status`, and refresh the MCP tool list.
+project, call `vidit_status`, and refresh the MCP tool list.
 
 ## Stale edit session
 
@@ -35,7 +35,7 @@ An auto session stays auto and does not fall back to manual review.
 
 ## Proposal awaiting review
 
-The draft is ready, but manual approval is still pending in OpenChatCut. Keep
+The draft is ready, but manual approval is still pending in Vidit. Keep
 polling `get_edit_session` only when the client needs the final state. Report
 `applied`, `rejected`, or `discarded` exactly as returned.
 
@@ -44,11 +44,11 @@ polling `get_edit_session` only when the client needs the final state. Report
 Update the installed skill, then re-read its files:
 
 ```bash
-npx skills update openchatcut
+npx skills update vidit
 ```
 
 If the source alias is unavailable:
 
 ```bash
-npx skills add 0xsline/OpenChatCut --skill openchatcut
+npx skills add 0xsline/OpenChatCut --skill vidit
 ```

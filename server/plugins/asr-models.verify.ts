@@ -83,7 +83,7 @@ assert.equal(
 assert.equal(asrModelFile(tiny.modelId, 'main', 'config.json'), undefined);
 assert.equal(asrModelFile(tiny.modelId, tiny.revision, '../config.json'), undefined);
 
-const root = await mkdtemp(join(tmpdir(), 'openchatcut-asr-integrity-'));
+const root = await mkdtemp(join(tmpdir(), 'vidit-asr-integrity-'));
 const expectedContent = Buffer.from('good');
 const entry: AsrModelEntry = {
   id: 'tiny',

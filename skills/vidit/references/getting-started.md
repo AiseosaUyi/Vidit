@@ -1,6 +1,6 @@
-# Connect OpenChatCut
+# Connect Vidit
 
-Use this flow when the user says “set up OpenChatCut”, when the `openchatcut`
+Use this flow when the user says “set up Vidit”, when the `vidit`
 MCP server is missing, or when its endpoint cannot be reached.
 
 ## 1. Find the endpoint
@@ -11,7 +11,7 @@ The default endpoint is:
 http://localhost:5199/api/external-mcp/mcp
 ```
 
-Start OpenChatCut first. Open **Settings → MCP** in the trusted editor window,
+Start Vidit first. Open **Settings → MCP** in the trusted editor window,
 copy the displayed bearer-token configuration, and use the endpoint shown there.
 If desktop port 5199 was occupied, that page reflects the active fallback port.
 
@@ -22,26 +22,26 @@ If desktop port 5199 was occupied, that page reflects the active fallback port.
 Check the existing entry:
 
 ```bash
-codex mcp get openchatcut
+codex mcp get vidit
 ```
 
 If it is missing, export the token copied from **Settings → MCP** and register it:
 
 ```bash
-export OPENCHATCUT_MCP_TOKEN='<token>'
-codex mcp add openchatcut \
+export VIDIT_MCP_TOKEN='<token>'
+codex mcp add vidit \
   --url http://localhost:5199/api/external-mcp/mcp \
-  --bearer-token-env-var OPENCHATCUT_MCP_TOKEN
+  --bearer-token-env-var VIDIT_MCP_TOKEN
 ```
 
 If an existing URL or token setting is stale, replace only that entry:
 
 ```bash
-export OPENCHATCUT_MCP_TOKEN='<token>'
-codex mcp remove openchatcut
-codex mcp add openchatcut \
+export VIDIT_MCP_TOKEN='<token>'
+codex mcp remove vidit
+codex mcp add vidit \
   --url http://localhost:5199/api/external-mcp/mcp \
-  --bearer-token-env-var OPENCHATCUT_MCP_TOKEN
+  --bearer-token-env-var VIDIT_MCP_TOKEN
 ```
 
 ### Claude Code
@@ -49,7 +49,7 @@ codex mcp add openchatcut \
 ```bash
 claude mcp add --transport http \
   -H "Authorization: Bearer <token>" \
-  openchatcut http://localhost:5199/api/external-mcp/mcp
+  vidit http://localhost:5199/api/external-mcp/mcp
 ```
 
 For another client, register the endpoint as a Streamable HTTP MCP server and
@@ -62,7 +62,7 @@ http://localhost:5199/api/external-mcp/mcp?toolExposure=progressive
 ```
 
 The equivalent request header is
-`X-OpenChatCut-Tool-Exposure: progressive`. The initial list keeps connection,
+`X-Vidit-Tool-Exposure: progressive`. The initial list keeps connection,
 session, project-read, `ToolSearch`, and `load_skill` tools. `ToolSearch` and
 `load_skill` expand only that transport session's list. Clients that cache one
 fixed tool list for the whole connection must use the default URL, which retains
@@ -73,7 +73,7 @@ the full compatibility surface.
 
 When the MCP tools are available, call:
 
-1. `openchatcut_status`
+1. `vidit_status`
 2. `list_projects`
 
 Interpret the result:
@@ -97,10 +97,10 @@ Once the user has identified a project:
 ## Token lifecycle
 
 The endpoint always requires a bearer token, including on localhost. By default,
-OpenChatCut generates it in private server memory and shows it only through the
+Vidit generates it in private server memory and shows it only through the
 trusted editor's **Settings → MCP** page. A server restart changes that generated
 token, so reconnect clients using the newly displayed configuration.
 
-`OPENCHATCUT_MCP_TOKEN` overrides the generated token when a stable deployment
+`VIDIT_MCP_TOKEN` overrides the generated token when a stable deployment
 secret is required. Keep it in the MCP client's secret/environment configuration;
 never write it into a repository, project document, chat, or browser storage.

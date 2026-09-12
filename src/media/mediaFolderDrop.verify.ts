@@ -44,7 +44,7 @@ function fakeDragEvent(initial: Record<string, string> = {}) {
 // Single-id media mime still works.
 {
   const event = fakeDragEvent({
-    'application/x-openchatcut-media-asset': JSON.stringify({ v: 1, assetId: 'solo' }),
+    'application/x-vidit-media-asset': JSON.stringify({ v: 1, assetId: 'solo' }),
   });
   assert.deepEqual(assetIdsFromFolderDrop(event), ['solo']);
 }

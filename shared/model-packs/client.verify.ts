@@ -47,7 +47,7 @@ globalThis.fetch = async (input, init) => {
 try {
   const credentialHeaders = new Headers({
     'Content-Type': 'text/plain',
-    'X-OpenChatCut-Editor-Credential': 'editor-secret',
+    'X-Vidit-Editor-Credential': 'editor-secret',
   });
   await installModelPack('rhythm-lite', credentialHeaders);
   await cancelModelPackInstall('rhythm-lite', credentialHeaders);
@@ -63,7 +63,7 @@ try {
     assert.equal(call.init?.body, JSON.stringify({ id: 'rhythm-lite' }));
     const headers = new Headers(call.init?.headers);
     assert.equal(headers.get('content-type'), 'application/json');
-    assert.equal(headers.get('x-openchatcut-editor-credential'), 'editor-secret');
+    assert.equal(headers.get('x-vidit-editor-credential'), 'editor-secret');
   }
   assert.deepEqual(changeEvents, Array(3).fill(MODEL_PACK_CATALOG_CHANGE_EVENT));
   assert.equal(credentialHeaders.get('content-type'), 'text/plain', 'the caller-owned headers must not be mutated');

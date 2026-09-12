@@ -3,7 +3,7 @@ import type { ProjectMeta } from '../../persist/projectStoreCoordinators';
 import { theme } from '../../theme';
 import { useT } from '../../i18n/locale';
 import { DashboardHeaderLinks } from '../DashboardHeaderLinks';
-import { BrandMark, Icon, OpenChatCutWordmark } from '../icons';
+import { BrandMark, Icon, ViditWordmark } from '../icons';
 import { bindAction } from '../../shortcuts/actionRegistry';
 // Opened on demand, so they load on demand — see dashboardDialogs.tsx.
 import {
@@ -62,7 +62,7 @@ export function DashboardTitlebarContent({ model }: { model: DashboardModel }) {
   return (
     <>
       <BrandMark size={20} />
-      <OpenChatCutWordmark />
+      <ViditWordmark />
       <span style={{ color: theme.textDim, fontSize: 13 }}>{t('· 我的工程')}</span>
       <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 2 }}>
         <DashboardHeaderLinks />
@@ -87,7 +87,7 @@ function ProjectToolbar({ projects, model }: { projects: ProjectMeta[]; model: D
         <ProjectSearch value={model.query} onChange={model.setQuery} />
         <button onClick={() => model.setDialog('cleanup', true)} style={importBtn} title={t('清理所有工程都不引用的上传素材(测试/已删工程残留)')}><Icon name="trash" size={13} /> {t('清理素材')}</button>
         <button onClick={() => model.transfer.fileRef.current?.click()} disabled={model.transfer.busy} style={importBtn} title={t('导入 .ccproj 工程文件(兼容旧 .ccproj.json)')}><Icon name="upload" size={13} /> {t('导入工程')}</button>
-        <input ref={model.transfer.fileRef} type="file" accept=".ccproj,.json,application/json,application/x-openchatcut-project" onChange={model.transfer.pickImport} style={{ display: 'none' }} />
+        <input ref={model.transfer.fileRef} type="file" accept=".ccproj,.json,application/json,application/x-vidit-project" onChange={model.transfer.pickImport} style={{ display: 'none' }} />
         <span style={{ color: theme.textDim, fontSize: 12.5 }}>
           {model.normalizedQuery
             ? t('{n} / {total} 个', { n: model.visibleProjects.length, total: projects.length })

@@ -1,13 +1,13 @@
 // EN dictionary (field fragmentation, key = Chinese original text). Data files are exempt from the upper limit of row count.
 // Cover partition: App.tsx / Editor.tsx / components root directory shell / reframe.
 export default {
-  '发现 OpenChatCut 新版本 {latest}，当前版本 {current}。请前往项目仓库查看更新。': 'OpenChatCut {latest} is available; current version: {current}. Visit the project repository to review the update.',
+  '发现 Vidit 新版本 {latest}，当前版本 {current}。请前往项目仓库查看更新。': 'Vidit {latest} is available; current version: {current}. Visit the project repository to review the update.',
   '当前已是最新版本 {version}': 'You are using the latest version, {version}.',
   '暂时无法检查更新，请稍后重试': 'Unable to check for updates. Please try again later.',
-  '发现 OpenChatCut 新版本 {latest}，当前版本 {current}。可以直接下载并安装。': 'OpenChatCut {latest} is available; current version: {current}. Download and install it directly.',
-  '正在下载 OpenChatCut {latest}：{percent}%': 'Downloading OpenChatCut {latest}: {percent}%',
-  'OpenChatCut {latest} 已下载，重启后完成安装。': 'OpenChatCut {latest} is downloaded. Restart to finish installing.',
-  '正在重启并安装 OpenChatCut…': 'Restarting to install OpenChatCut…',
+  '发现 Vidit 新版本 {latest}，当前版本 {current}。可以直接下载并安装。': 'Vidit {latest} is available; current version: {current}. Download and install it directly.',
+  '正在下载 Vidit {latest}：{percent}%': 'Downloading Vidit {latest}: {percent}%',
+  'Vidit {latest} 已下载，重启后完成安装。': 'Vidit {latest} is downloaded. Restart to finish installing.',
+  '正在重启并安装 Vidit…': 'Restarting to install Vidit…',
   '下载更新失败，请重试': 'The update download failed. Try again.',
   '安装更新失败，请重试': 'The update installation failed. Try again.',
   '下载更新': 'Download update',

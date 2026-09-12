@@ -1,7 +1,7 @@
 import { basename, isAbsolute } from 'node:path';
 import type { LocalMediaImport } from './local-media-import.ts';
 
-export const LOCAL_MEDIA_IMPORT_CHANNEL = 'openchatcut:import-local-media';
+export const LOCAL_MEDIA_IMPORT_CHANNEL = 'vidit:import-local-media';
 
 interface LocalMediaFile {
   readonly name: string;

@@ -177,7 +177,7 @@ async function codexStatus(): Promise<CodexAgentStatus> {
       version: installation.version,
       account: null,
       loginPending: activeClient?.loginPending ?? false,
-      error: 'Codex app-server is unavailable. Restart OpenChatCut and try again.',
+      error: 'Codex app-server is unavailable. Restart Vidit and try again.',
     };
   }
 }
@@ -444,7 +444,7 @@ function handleFailure(res: ServerResponse, error: unknown): void {
 
 export function codexAgentPlugin(): Plugin {
   return {
-    name: 'openchatcut-codex-agent',
+    name: 'vidit-codex-agent',
     configureServer(server) {
       server.middlewares.use('/api/codex', (req, res) => {
         void handleCodexRequest(req, res).catch((error) => handleFailure(res, error));

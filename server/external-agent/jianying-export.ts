@@ -162,7 +162,7 @@ async function writeSrtFile(captions: JianyingExportCaption[]): Promise<{ file: 
 }
 
 /**
- * Build a CapCut/JianYing draft from an OpenChatCut timeline using capcut-cli.
+ * Build a CapCut/JianYing draft from an Vidit timeline using capcut-cli.
  * The first video clip seeds the draft (quickstart); remaining video clips are
  * appended at their timeline positions; audio clips and captions follow.
  */
@@ -186,7 +186,7 @@ export async function exportJianyingDraft(raw: Partial<JianyingExportRequest>): 
   if (missing.length > 0) {
     return { ok: false, draftName: '', draftPath: '', addedVideos: 0, addedAudios: 0, captions: 0, warnings, error: `media files not found locally: ${missing.slice(0, 3).join(', ')}` };
   }
-  const draftName = String(request.draftName || `OpenChatCut-${new Date().toISOString().slice(0, 16).replace(/[:T]/g, '')}`)
+  const draftName = String(request.draftName || `Vidit-${new Date().toISOString().slice(0, 16).replace(/[:T]/g, '')}`)
     .replace(/[\\/]/g, '')
     .replaceAll('\0', '')
     .slice(0, 60);

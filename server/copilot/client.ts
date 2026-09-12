@@ -5,11 +5,11 @@ import type { CopilotAccountSummary, CopilotAgentModel } from '../../shared/copi
 import { resolveCopilotCli } from './installation.ts';
 
 /**
- * Isolated Copilot home, mirroring `CODEX_HOME = ~/.openchatcut/codex`. Keeps
- * OpenChatCut's session state, config and logs out of the user's own
+ * Isolated Copilot home, mirroring `CODEX_HOME = ~/.vidit/codex`. Keeps
+ * Vidit's session state, config and logs out of the user's own
  * `~/.copilot` so an in-app run can never disturb their terminal CLI.
  */
-const COPILOT_HOME = join(homedir(), '.openchatcut', 'copilot');
+const COPILOT_HOME = join(homedir(), '.vidit', 'copilot');
 const RUNTIME_REQUEST_TIMEOUT_MS = 15_000;
 const MODEL_CACHE_TTL_MS = 5 * 60_000;
 
@@ -70,7 +70,7 @@ async function startCopilotClient(): Promise<CopilotClient> {
   const path = await resolveCopilotCli();
   if (!path) throw new CopilotProcessError(
     'Copilot CLI not found. Install it (`brew install copilot` or `npm i -g @github/copilot`) '
-    + 'or set OPENCHATCUT_COPILOT_PATH.',
+    + 'or set VIDIT_COPILOT_PATH.',
   );
   const client = new CopilotClient({
     mode: 'empty',
@@ -124,7 +124,7 @@ function numeric(value: unknown): number | null {
 }
 
 /**
- * Project the SDK model catalog onto OpenChatCut's model-picker shape. The
+ * Project the SDK model catalog onto Vidit's model-picker shape. The
  * limits map straight onto `ModelCapabilities` (contextWindowTokens /
  * maxOutputTokens), which is what the `api` and `codex` backends already feed.
  */

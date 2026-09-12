@@ -8,15 +8,15 @@ import { join } from 'node:path';
 const root = await mkdtemp(join(tmpdir(), 'occ-sonilo-upload-'));
 const profileId = '8eafcf20-e80f-4acd-a0ef-9169555ebad7';
 const original = {
-  dataDir: process.env.OPENCHATCUT_DATA_DIR,
-  profileId: process.env.OPENCHATCUT_DEV_PROFILE_ID,
+  dataDir: process.env.VIDIT_DATA_DIR,
+  profileId: process.env.VIDIT_DEV_PROFILE_ID,
   httpProxy: process.env.HTTP_PROXY,
   httpsProxy: process.env.HTTPS_PROXY,
   lowerHttpProxy: process.env.http_proxy,
   lowerHttpsProxy: process.env.https_proxy,
 };
-process.env.OPENCHATCUT_DATA_DIR = root;
-process.env.OPENCHATCUT_DEV_PROFILE_ID = profileId;
+process.env.VIDIT_DATA_DIR = root;
+process.env.VIDIT_DEV_PROFILE_ID = profileId;
 delete process.env.HTTP_PROXY;
 delete process.env.HTTPS_PROXY;
 delete process.env.http_proxy;
@@ -29,7 +29,7 @@ await writeFile(join(uploads, 'cut.mp4'), Buffer.alloc(2 * 1024 * 1024, 7));
 let requestBody = '';
 const provider = createServer(async (req, res) => {
   assert.equal(req.headers.authorization, 'Bearer test-key');
-  assert.equal(req.headers['user-agent'], 'OpenChatCut');
+  assert.equal(req.headers['user-agent'], 'Vidit');
   const chunks: Buffer[] = [];
   for await (const chunk of req) chunks.push(Buffer.from(chunk));
   requestBody = Buffer.concat(chunks).toString('latin1');
@@ -57,10 +57,10 @@ try {
 } finally {
   await new Promise<void>((resolve) => provider.close(() => resolve()));
   await rm(root, { recursive: true, force: true });
-  if (original.dataDir === undefined) delete process.env.OPENCHATCUT_DATA_DIR;
-  else process.env.OPENCHATCUT_DATA_DIR = original.dataDir;
-  if (original.profileId === undefined) delete process.env.OPENCHATCUT_DEV_PROFILE_ID;
-  else process.env.OPENCHATCUT_DEV_PROFILE_ID = original.profileId;
+  if (original.dataDir === undefined) delete process.env.VIDIT_DATA_DIR;
+  else process.env.VIDIT_DATA_DIR = original.dataDir;
+  if (original.profileId === undefined) delete process.env.VIDIT_DEV_PROFILE_ID;
+  else process.env.VIDIT_DEV_PROFILE_ID = original.profileId;
   if (original.httpProxy === undefined) delete process.env.HTTP_PROXY;
   else process.env.HTTP_PROXY = original.httpProxy;
   if (original.httpsProxy === undefined) delete process.env.HTTPS_PROXY;

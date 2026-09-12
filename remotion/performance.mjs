@@ -28,7 +28,7 @@ function configuredConcurrency(value, cores) {
 export function resolveRenderConcurrency({
   cores = availableParallelism(),
   memoryBytes = totalmem(),
-  override = process.env.OPENCHATCUT_RENDER_CONCURRENCY,
+  override = process.env.VIDIT_RENDER_CONCURRENCY,
 } = {}) {
   const count = cpuCount(cores);
   const configured = configuredConcurrency(override, count);
@@ -54,7 +54,7 @@ export function resolveOffthreadVideoThreads({ cores = availableParallelism() } 
  */
 export function remotionHardwareAcceleration(codec, {
   platform = process.platform,
-  disabled = /^(?:1|true|yes)$/i.test(process.env.OPENCHATCUT_DISABLE_HARDWARE_ENCODING ?? ''),
+  disabled = /^(?:1|true|yes)$/i.test(process.env.VIDIT_DISABLE_HARDWARE_ENCODING ?? ''),
   encoder,
 } = {}) {
   if (disabled || codec !== 'h264' || encoder === 'libx264') return 'disable';
@@ -146,7 +146,7 @@ function overrideH264Args(args, encoder, vaapiDevice) {
 
 /** Override only H.264 encoding steps; final copy/mux steps stay untouched. */
 export function h264FfmpegOverride(encoder, {
-  vaapiDevice = process.env.OPENCHATCUT_VAAPI_DEVICE,
+  vaapiDevice = process.env.VIDIT_VAAPI_DEVICE,
 } = {}) {
   if (!Object.hasOwn(DIRECT_H264_ENCODERS, encoder)) {
     throw new Error(`unsupported direct H.264 encoder: ${String(encoder)}`);

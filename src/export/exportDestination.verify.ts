@@ -310,7 +310,7 @@ async function verifyDesktopRestoreAndStreaming(): Promise<void> {
   let suggestedFilename = '';
   installWindow({
     location: { href: 'http://localhost:5199/' },
-    openChatCutDesktop: {
+    viditDesktop: {
       restoreExportDirectory: async () => grant,
       selectExportDirectory: async () => grant,
       selectExportFile: async (suggested: string) => {
@@ -346,7 +346,7 @@ async function verifyDesktopRestoreAndStreaming(): Promise<void> {
       }, { status: 409 });
     }
     uploaded = init?.headers
-      ? String(new Headers(init.headers).get('X-OpenChatCut-Export-Source'))
+      ? String(new Headers(init.headers).get('X-Vidit-Export-Source'))
       : await new Response(init?.body).text();
     return new Response(null, { status: 204 });
   }) as typeof fetch;

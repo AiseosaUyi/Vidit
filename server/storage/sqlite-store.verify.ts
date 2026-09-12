@@ -61,12 +61,12 @@ function readMigrationPhase(path: string): number | null {
 async function main(): Promise<void> {
   const home = mkdtempSync(join(tmpdir(), 'occ-sqlite-migration-'));
   const previousHome = process.env.HOME;
-  const previousStore = process.env.OPENCHATCUT_GENERATION_JOB_STORE;
-  const previousSwitch = process.env.OPENCHATCUT_SQLITE_STORE;
+  const previousStore = process.env.VIDIT_GENERATION_JOB_STORE;
+  const previousSwitch = process.env.VIDIT_SQLITE_STORE;
   const customJobsPath = join(home, 'custom-profile', 'jobs-ledger.json');
   process.env.HOME = home;
-  process.env.OPENCHATCUT_GENERATION_JOB_STORE = customJobsPath;
-  delete process.env.OPENCHATCUT_SQLITE_STORE;
+  process.env.VIDIT_GENERATION_JOB_STORE = customJobsPath;
+  delete process.env.VIDIT_SQLITE_STORE;
 
   try {
     // Import only after profile variables are installed: runtimeProfile caches.
@@ -367,10 +367,10 @@ async function main(): Promise<void> {
   } finally {
     if (previousHome === undefined) delete process.env.HOME;
     else process.env.HOME = previousHome;
-    if (previousStore === undefined) delete process.env.OPENCHATCUT_GENERATION_JOB_STORE;
-    else process.env.OPENCHATCUT_GENERATION_JOB_STORE = previousStore;
-    if (previousSwitch === undefined) delete process.env.OPENCHATCUT_SQLITE_STORE;
-    else process.env.OPENCHATCUT_SQLITE_STORE = previousSwitch;
+    if (previousStore === undefined) delete process.env.VIDIT_GENERATION_JOB_STORE;
+    else process.env.VIDIT_GENERATION_JOB_STORE = previousStore;
+    if (previousSwitch === undefined) delete process.env.VIDIT_SQLITE_STORE;
+    else process.env.VIDIT_SQLITE_STORE = previousSwitch;
     rmSync(home, { recursive: true, force: true });
   }
 }

@@ -168,18 +168,18 @@ const attr = (el: string, name: string): string => el.match(new RegExp(`${name}=
       durationInFrames: 30, sourceFilename, originalFilePath,
     }],
   };
-  const xml = timelineToFcpxml(state, { mediaDir: '/Users/me/.openchatcut/media' });
+  const xml = timelineToFcpxml(state, { mediaDir: '/Users/me/.vidit/media' });
   const assetOpen = xml.match(/<asset(?=[\s>])[^>]*>/)?.[0] ?? '';
   assert.ok(!/\ssrc=/.test(assetOpen), 'asset 地址只能存在于 media-rep');
   assert.ok(assetOpen.includes('name="旅行.最终版.001.MOV"'), '可编辑显示名不得覆盖原始文件名');
   assert.ok(xml.includes('kind="original-media" src="file:///Users/me/%E6%97%85%E8%A1%8C/%E6%97%85%E8%A1%8C.%E6%9C%80%E7%BB%88%E7%89%88.001.MOV"'));
-  assert.ok(xml.includes('kind="proxy-media" src="file:///Users/me/.openchatcut/media/8e45fd6f-8da8-4d6a-8a4f-339d6a8fd747.mp4"'));
+  assert.ok(xml.includes('kind="proxy-media" src="file:///Users/me/.vidit/media/8e45fd6f-8da8-4d6a-8a4f-339d6a8fd747.mp4"'));
   // <pathurl> is the FCPXML-standard location element DaVinci Resolve reads;
   // non-ASCII segments stay native UTF-8 (Resolve does not decode
   // percent-encoded paths on macOS), only URL-breaking characters encode.
   assert.ok(xml.includes('<pathurl>file:///Users/me/旅行/旅行.最终版.001.MOV</pathurl>'),
     'original-media pathurl keeps native UTF-8 path segments');
-  assert.ok(xml.includes('<pathurl>file:///Users/me/.openchatcut/media/8e45fd6f-8da8-4d6a-8a4f-339d6a8fd747.mp4</pathurl>'),
+  assert.ok(xml.includes('<pathurl>file:///Users/me/.vidit/media/8e45fd6f-8da8-4d6a-8a4f-339d6a8fd747.mp4</pathurl>'),
     'proxy-media pathurl carries the internal working copy');
   assert.ok(!xml.includes('<pathurl>file:///Users/me/%E6%97%85%E8%A1%8C'),
     'pathurl never percent-encodes non-ASCII');
@@ -195,26 +195,26 @@ const attr = (el: string, name: string): string => el.match(new RegExp(`${name}=
       ...state.assets![0]!,
       sourceFilename: 'literal%2F旅行.最终版.001.MOV',
     }],
-  }, { mediaDir: '/Users/me/.openchatcut/media' });
+  }, { mediaDir: '/Users/me/.vidit/media' });
   assert.ok(encodedSeparatorXml.includes('suggestedFilename="literal%2F旅行.最终版.001"'),
     'literal percent-encoded separators in sourceFilename are not URL-decoded by the serializer');
   assert.ok(!encodedSeparatorXml.includes('suggestedFilename="旅行.最终版.001"'));
 
-  const withoutPool = timelineToFcpxml({ ...state, assets: undefined }, { mediaDir: '/Users/me/.openchatcut/media' });
+  const withoutPool = timelineToFcpxml({ ...state, assets: undefined }, { mediaDir: '/Users/me/.vidit/media' });
   assert.ok(withoutPool.includes('kind="original-media" src="file:///Users/me/%E6%97%85%E8%A1%8C/'), '移除池素材后回退时间线来源元数据');
 
   const windowsXml = timelineToFcpxml({
     ...state,
     assets: [{ ...state.assets![0]!, originalFilePath: 'D:\\媒体\\旅行.最终版.001.MOV' }],
-  }, { mediaDir: 'D:\\OpenChatCut\\media' });
+  }, { mediaDir: 'D:\\Vidit\\media' });
   assert.ok(windowsXml.includes('src="file:///D:/%E5%AA%92%E4%BD%93/%E6%97%85%E8%A1%8C.%E6%9C%80%E7%BB%88%E7%89%88.001.MOV"'), 'Windows 原片路径合法编码');
 
   const uncXml = timelineToFcpxml({
     ...state,
     assets: [{ ...state.assets![0]!, originalFilePath: '\\\\server\\共享 空间\\旅行.最终版.001.MOV' }],
-  }, { mediaDir: '\\\\server\\OpenChatCut\\media' });
+  }, { mediaDir: '\\\\server\\Vidit\\media' });
   assert.ok(uncXml.includes('kind="original-media" src="file://server/%E5%85%B1%E4%BA%AB%20%E7%A9%BA%E9%97%B4/%E6%97%85%E8%A1%8C.%E6%9C%80%E7%BB%88%E7%89%88.001.MOV"'), 'UNC 原片路径合法编码');
-  assert.ok(uncXml.includes('kind="proxy-media" src="file://server/OpenChatCut/media/8e45fd6f-8da8-4d6a-8a4f-339d6a8fd747.mp4"'), 'UNC 代理路径合法编码');
+  assert.ok(uncXml.includes('kind="proxy-media" src="file://server/Vidit/media/8e45fd6f-8da8-4d6a-8a4f-339d6a8fd747.mp4"'), 'UNC 代理路径合法编码');
 }
 
 // ── Resolve variants retain existing differences ──
@@ -225,7 +225,7 @@ const attr = (el: string, name: string): string => el.match(new RegExp(`${name}=
   };
   const resolveXml = timelineToFcpxml(state, { nleFormat: 'fcp_xml_resolve' });
   assert.ok(resolveXml.includes('colorSpace="1-1-1 (Rec. 709)"'), 'Resolve 变体带 Rec.709');
-  assert.ok(resolveXml.includes('<event name="OpenChatCut Export (Resolve)">'), 'Resolve 事件名');
+  assert.ok(resolveXml.includes('<event name="Vidit Export (Resolve)">'), 'Resolve 事件名');
   assert.ok(!timelineToFcpxml(state).includes('colorSpace'), '默认变体不带 colorSpace');
 }
 

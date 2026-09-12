@@ -156,7 +156,7 @@ function rebuildCodexChoices(): void {
  * Copilot serves models from several vendors behind one subscription, and the
  * runtime reports exact limits per model, so capabilities come from those facts
  * rather than the bundled catalog. Models without tool support are dropped:
- * every OpenChatCut editing flow needs tool calls.
+ * every Vidit editing flow needs tool calls.
  */
 function rebuildCopilotChoices(): void {
   if (!copilotStatus?.installed || !copilotStatus.supported || !copilotStatus.authenticated) {

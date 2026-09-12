@@ -47,9 +47,9 @@ const PROGRESSIVE_BOOT_NAMES = [
 ] as const;
 
 export function requestedMcpToolExposure(req: IncomingMessage): McpToolExposureMode {
-  const header = req.headers['x-openchatcut-tool-exposure'];
+  const header = req.headers['x-vidit-tool-exposure'];
   const headerValue = Array.isArray(header) ? header[0] : header;
-  const queryValue = new URL(req.url ?? '/', 'http://openchatcut.local')
+  const queryValue = new URL(req.url ?? '/', 'http://vidit.local')
     .searchParams.get('toolExposure');
   return headerValue === 'progressive' || queryValue === 'progressive'
     ? 'progressive'

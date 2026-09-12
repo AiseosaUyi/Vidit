@@ -10,7 +10,7 @@ async function main(): Promise<void> {
   const root = mkdtempSync(join(tmpdir(), 'occ-fts-verify-'));
   const previousHome = process.env.HOME;
   process.env.HOME = root;
-  process.env.OPENCHATCUT_SQLITE_STORE = '1';
+  process.env.VIDIT_SQLITE_STORE = '1';
 
   try {
     const { initializeSqliteProjectStore, SQLITE_STORE_ENV } = await import('./sqlite-store.ts');

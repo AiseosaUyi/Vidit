@@ -90,9 +90,9 @@ interface DesktopPathImportApi {
 
 function desktopApi(): DesktopPathImportApi | null {
   const bridge = (typeof window === 'undefined' ? undefined : window) as unknown as {
-    openChatCutDesktop?: DesktopPathImportApi;
+    viditDesktop?: DesktopPathImportApi;
   };
-  return bridge?.openChatCutDesktop ?? null;
+  return bridge?.viditDesktop ?? null;
 }
 
 export async function execAgentPathImportTool(

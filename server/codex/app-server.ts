@@ -9,8 +9,8 @@ import { codexCommand } from './command.ts';
 const INITIALIZE_TIMEOUT_MS = 10_000;
 const MAX_REQUEST_TIMEOUT_MS = 60_000;
 const MAX_PROTOCOL_LINE_BYTES = 8 * 1024 * 1024;
-const CODEX_HOME = join(homedir(), '.openchatcut', 'codex');
-/** System Codex home that OpenChatCut's isolated CODEX_HOME inherits credentials from. */
+const CODEX_HOME = join(homedir(), '.vidit', 'codex');
+/** System Codex home that Vidit's isolated CODEX_HOME inherits credentials from. */
 const SYSTEM_CODEX_HOME = join(homedir(), '.codex');
 export const CODEX_DISABLED_FEATURES = [
   'apps',
@@ -263,7 +263,7 @@ export class CodexAppServerClient {
   private async startProcess(): Promise<void> {
     await mkdir(CODEX_HOME, { recursive: true, mode: 0o700 });
     await this.seedCredentials();
-    const runtimeCwd = await mkdtemp(join(tmpdir(), 'openchatcut-codex-runtime-'));
+    const runtimeCwd = await mkdtemp(join(tmpdir(), 'vidit-codex-runtime-'));
     const command = codexCommand(this.executablePath, [...this.argsPrefix, ...APP_SERVER_ARGS]);
     const child = spawn(command.executable, command.args, {
       cwd: runtimeCwd,
@@ -278,7 +278,7 @@ export class CodexAppServerClient {
     this.attachProcess(child);
     try {
       await this.rawRequest('initialize', {
-        clientInfo: { name: 'openchatcut', title: 'OpenChatCut', version: '1' },
+        clientInfo: { name: 'vidit', title: 'Vidit', version: '1' },
         capabilities: { experimentalApi: true, requestAttestation: false },
       }, { timeoutMs: INITIALIZE_TIMEOUT_MS, restartOnTimeout: true });
       this.writeMessage({ method: 'initialized' });
@@ -358,7 +358,7 @@ export class CodexAppServerClient {
       return;
     }
     if (method === 'execCommandApproval' || method === 'applyPatchApproval') {
-      this.writeMessage({ id, result: { decision: { denied: { rejection: 'Use the OpenChatCut proposal review.' } } } });
+      this.writeMessage({ id, result: { decision: { denied: { rejection: 'Use the Vidit proposal review.' } } } });
       return;
     }
     const request = this.serverRequest(id, method, params);
@@ -366,11 +366,11 @@ export class CodexAppServerClient {
       try {
         if (handler(request)) return;
       } catch {
-        request.reject(-32603, 'OpenChatCut could not handle this request.');
+        request.reject(-32603, 'Vidit could not handle this request.');
         return;
       }
     }
-    request.reject(-32601, 'Method not supported by OpenChatCut.');
+    request.reject(-32601, 'Method not supported by Vidit.');
   }
 
   private serverRequest(id: number | string, method: string, params: Record<string, unknown>): CodexServerRequest {

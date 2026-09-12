@@ -7,17 +7,17 @@ import { cleanupStaleExportStages } from './export-stage.ts';
 import { serverPlugins } from './index.ts';
 
 const pluginNames = serverPlugins().map((plugin) => plugin.name);
-const stageIndex = pluginNames.indexOf('openchatcut-export-stage');
-const exportIndex = pluginNames.indexOf('openchatcut-export');
+const stageIndex = pluginNames.indexOf('vidit-export-stage');
+const exportIndex = pluginNames.indexOf('vidit-export');
 assert.ok(stageIndex >= 0 && exportIndex >= 0 && stageIndex < exportIndex, 'stage route must precede /export catch-all');
 
-const directory = await mkdtemp(join(tmpdir(), 'openchatcut-export-stage-cleanup-'));
+const directory = await mkdtemp(join(tmpdir(), 'vidit-export-stage-cleanup-'));
 try {
   const now = Date.now();
-  const staleStage = 'openchatcut-export-stage-00000000-0000-4000-8000-000000000001.mp4';
-  const stalePartial = 'openchatcut-export-stage-00000000-0000-4000-8000-000000000002.webm.part';
-  const freshStage = 'openchatcut-export-stage-00000000-0000-4000-8000-000000000003.webm';
-  const prefixedUserFile = 'openchatcut-export-stage-project.mp4';
+  const staleStage = 'vidit-export-stage-00000000-0000-4000-8000-000000000001.mp4';
+  const stalePartial = 'vidit-export-stage-00000000-0000-4000-8000-000000000002.webm.part';
+  const freshStage = 'vidit-export-stage-00000000-0000-4000-8000-000000000003.webm';
+  const prefixedUserFile = 'vidit-export-stage-project.mp4';
   await Promise.all([
     writeFile(join(directory, staleStage), 'stale'),
     writeFile(join(directory, stalePartial), 'partial'),

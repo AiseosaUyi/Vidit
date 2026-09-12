@@ -155,7 +155,7 @@ const atlasMusicProbe: ProbeDef = {
   needs: [['ATLASCLOUD_API_KEY']],
   run: async (get) => {
     const root = base(get, 'ATLASCLOUD_API_BASE', 'https://api.atlascloud.ai/api/v1');
-    const response = await fetchWithProxy(`${root}/model/prediction/openchatcut-credential-probe`, {
+    const response = await fetchWithProxy(`${root}/model/prediction/vidit-credential-probe`, {
       signal: t(), headers: bearer(get('ATLASCLOUD_API_KEY')),
     });
     if (response.status !== 404) return response;
@@ -288,7 +288,7 @@ export const PROBES: Record<string, ProbeDef> = {
         'X-Api-Resource-Id': get('DOUBAO_TTS_RESOURCE_ID') || 'seed-tts-2.0',
       },
       body: JSON.stringify({
-        user: { uid: 'openchatcut-probe' },
+        user: { uid: 'vidit-probe' },
         req_params: { text: '测', speaker: 'zh_female_vv_uranus_bigtts', audio_params: { format: 'mp3', sample_rate: 24_000 } },
       }),
     }),

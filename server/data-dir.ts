@@ -13,7 +13,7 @@ import { dirname, isAbsolute, join, resolve } from 'node:path';
 
 /** Fixed pointer location — deliberately outside the movable storage root. */
 export function dataDirPointerPath(home: string = homedir()): string {
-  return join(home, '.openchatcut', 'data-dir.json');
+  return join(home, '.vidit', 'data-dir.json');
 }
 
 /** Expand ~/ and require an absolute path; anything else is rejected. */
@@ -44,7 +44,7 @@ export function readDataDirPointer(home: string = homedir()): string | null {
 /** Record the storage root, or clear it (empty value) to return to the default. */
 export async function writeDataDirPointer(dir: string | null, home: string = homedir()): Promise<void> {
   const pointer = dataDirPointerPath(home);
-  await mkdir(join(home, '.openchatcut'), { recursive: true });
+  await mkdir(join(home, '.vidit'), { recursive: true });
   if (!dir) {
     await unlink(pointer).catch(() => undefined);
     return;

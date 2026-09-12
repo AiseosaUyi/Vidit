@@ -1,11 +1,11 @@
 {
   "mcpServers": {
-    "openchatcut": {
+    "vidit": {
       "type": "http",
       "url": "http://localhost:5199/api/external-mcp/mcp",
       "headers": {
-        "x-openchatcut-mcp-client": "claude-code",
-        "x-openchatcut-mcp-surface": "external"
+        "x-vidit-mcp-client": "claude-code",
+        "x-vidit-mcp-surface": "external"
       }
     }
   }

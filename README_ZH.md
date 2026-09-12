@@ -1,8 +1,13 @@
 <p align="center">
-  <img src="public/openchatcut-icon.png" width="96" alt="OpenChatCut" />
+  <img src="public/vidit-icon.png" width="96" alt="Vidit" />
 </p>
 
-<h1 align="center">OpenChatCut</h1>
+<h1 align="center">Vidit</h1>
+
+<p align="center">
+  <a href="https://github.com/0xsline/OpenChatCut">OpenChatCut</a> 的个人分支项目。本文档其余部分在描述具体内容时，
+  仍沿用上游项目的原始名称。
+</p>
 
 <p align="center">
   <strong>简体中文</strong> · <a href="README.md">English</a>

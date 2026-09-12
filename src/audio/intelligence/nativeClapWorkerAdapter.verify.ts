@@ -38,7 +38,7 @@ Object.defineProperty(globalThis, 'Worker', { configurable: true, value: FakeBro
 Object.defineProperty(globalThis, 'window', {
   configurable: true,
   value: {
-    openChatCutDesktop: {
+    viditDesktop: {
       inference: {
         setEnabled: async () => {},
         clap: async (request: DesktopClapRequest) => {

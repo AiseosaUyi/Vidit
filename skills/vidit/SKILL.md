@@ -1,11 +1,11 @@
 ---
-name: openchatcut
-description: Connect an MCP-capable coding agent to OpenChatCut and edit local video projects. Use when the user asks to install, connect, or set up OpenChatCut; inspect or edit an OpenChatCut project; work with its timeline, transcript, captions, media, generation, motion graphics, audio, color, or export tools; or recover from an OpenChatCut MCP error.
+name: vidit
+description: Connect an MCP-capable coding agent to Vidit and edit local video projects. Use when the user asks to install, connect, or set up Vidit; inspect or edit an Vidit project; work with its timeline, transcript, captions, media, generation, motion graphics, audio, color, or export tools; or recover from an Vidit MCP error.
 ---
 
-# OpenChatCut
+# Vidit
 
-OpenChatCut is a local-first, agent-native video editor. This skill is the
+Vidit is a local-first, agent-native video editor. This skill is the
 single external entry point; specialized editing guidance remains inside the
 running editor and is loaded on demand with `load_skill`.
 
@@ -19,9 +19,9 @@ running editor and is loaded on demand with `load_skill`.
 
 ## Essentials
 
-1. Start OpenChatCut before connecting. The default MCP endpoint is
+1. Start Vidit before connecting. The default MCP endpoint is
    `http://localhost:5199/api/external-mcp/mcp`.
-2. Call `openchatcut_status`, then `list_projects`. Select a project only when
+2. Call `vidit_status`, then `list_projects`. Select a project only when
    the user names it or the current context identifies it.
 3. Call `load_skill` before specialized work. It is read-only and requires
    neither `begin_edit_session` nor `editSessionId`; available names and support
@@ -36,7 +36,7 @@ running editor and is loaded on demand with `load_skill`.
    discard its own session.
 6. Use `approvalMode: "manual"` unless the user explicitly asks for unattended
    application. In manual mode, the user approves the complete proposal in
-   OpenChatCut. In auto mode, `review_edit_session` applies the complete draft.
+   Vidit. In auto mode, `review_edit_session` applies the complete draft.
 7. Finish with `review_edit_session`. Report success only after
    `get_edit_session` returns `applied`.
 
@@ -44,15 +44,15 @@ running editor and is loaded on demand with `load_skill`.
 
 `2026-09-04.1`
 
-The OpenChatCut MCP server announces its required skill baseline. If the server
+The Vidit MCP server announces its required skill baseline. If the server
 baseline is newer, run:
 
 ```bash
-npx skills update openchatcut
+npx skills update vidit
 ```
 
 Fallback command:
 
 ```bash
-npx skills add 0xsline/OpenChatCut --skill openchatcut
+npx skills add 0xsline/OpenChatCut --skill vidit
 ```

@@ -152,7 +152,7 @@ async function runInSkillDir(slug: string, body: ExecRequest): Promise<unknown> 
 
 export function skillExecPlugin(): Plugin {
   return {
-    name: 'openchatcut-skill-exec',
+    name: 'vidit-skill-exec',
     configureServer(server) {
       server.middlewares.use('/api/skills', (req, res, next) => {
         // /api/skills/install and /api/skills/<slug>/exec are owned by their own plugins.

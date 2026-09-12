@@ -251,7 +251,7 @@ export function registerExportRoute(server: ViteDevServer): void {
         return;
       }
       const { state, format, media, frameRange, filename, scale } = plan;
-      const finalOutput = join(tmpdir(), `openchatcut-export-${randomUUID()}.${media.ext}`);
+      const finalOutput = join(tmpdir(), `vidit-export-${randomUUID()}.${media.ext}`);
       outputLocation = finalOutput;
       await withExportPermit(async () => {
         await renderTimeline({

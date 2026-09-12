@@ -92,7 +92,7 @@ export async function doubaoVoice(options: VoiceOptions, input: ValidVoiceReques
   const response = await fetchWithProxy(`${options.doubaoBaseUrl.replace(/\/$/, '')}/api/v3/tts/unidirectional`, {
     method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Api-App-Id': options.doubaoAppId,
       'X-Api-Access-Key': options.doubaoAccessKey, 'X-Api-Resource-Id': options.doubaoResourceId },
-    body: JSON.stringify({ user: { uid: `openchatcut-${randomUUID()}` }, req_params: reqParams }),
+    body: JSON.stringify({ user: { uid: `vidit-${randomUUID()}` }, req_params: reqParams }),
   });
   if (!response.ok) throw new Error(await providerError(response));
   return doubaoAudio(await response.text());

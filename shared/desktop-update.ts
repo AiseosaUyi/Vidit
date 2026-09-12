@@ -1,9 +1,9 @@
 export const DESKTOP_UPDATE_CHANNELS = {
-  state: 'openchatcut:update-state',
-  getState: 'openchatcut:update-get-state',
-  check: 'openchatcut:update-check',
-  download: 'openchatcut:update-download',
-  install: 'openchatcut:update-install',
+  state: 'vidit:update-state',
+  getState: 'vidit:update-get-state',
+  check: 'vidit:update-check',
+  download: 'vidit:update-download',
+  install: 'vidit:update-install',
 } as const;
 
 export type DesktopUpdateCheckSource = 'auto' | 'manual';

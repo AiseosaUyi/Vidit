@@ -135,31 +135,31 @@ export function Icon({ name, size = 16, color = 'currentColor', strokeWidth = 1.
  * (Skin Discipline Guaranteed ≥4.5 vs.). Use this when replacing sparkles before wordmark. */
 export function BrandMark({ size = 16 }: { size?: number }) {
   return (
-    <img src="/openchatcut-icon.png" alt="" aria-hidden width={size} height={size} style={{ display: 'block' }} />
+    <img src="/vidit-icon.png" alt="" aria-hidden width={size} height={size} style={{ display: 'block' }} />
   );
 }
 
-/** OpenChatCut word mark: OPEN reverse white badge + Chat Cut solid word mark. */
-export function OpenChatCutWordmark({ width = 126 }: { width?: number }) {
+/** Vidit word mark: reverse-white "V" badge + solid word mark. */
+export function ViditWordmark({ width = 126 }: { width?: number }) {
   return (
     <svg
-      aria-label="OpenChatCut"
+      aria-label="Vidit"
       role="img"
       width={width}
       height={width / 4}
-      viewBox="0 0 504 126"
+      viewBox="0 0 360 126"
       style={{ display: 'block', flexShrink: 0 }}
     >
-      <rect x="0" y="13" width="166" height="92" rx="14" fill="currentColor" />
+      <rect x="0" y="13" width="100" height="100" rx="18" fill="currentColor" />
       <text
         fontFamily="Inter, Geist, system-ui, sans-serif"
         dominantBaseline="alphabetic"
       >
-        <tspan x="83" y="82" textAnchor="middle" fill="var(--cc-panel)" fontSize="58" fontWeight="850" letterSpacing="-0.045em">
-          OPEN
+        <tspan x="50" y="87" textAnchor="middle" fill="var(--cc-panel)" fontSize="66" fontWeight="850" letterSpacing="-0.03em">
+          V
         </tspan>
-        <tspan x="188" y="79" fill="currentColor" fontSize="62" fontWeight="720" letterSpacing="-0.045em">
-          Chat Cut
+        <tspan x="118" y="79" fill="currentColor" fontSize="62" fontWeight="720" letterSpacing="-0.03em">
+          Vidit
         </tspan>
       </text>
     </svg>

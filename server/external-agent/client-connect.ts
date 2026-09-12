@@ -1,5 +1,5 @@
-// One-click external client connection: writes the OpenChatCut MCP endpoint
-// and token into well-known local client config files. Only the `openchatcut`
+// One-click external client connection: writes the Vidit MCP endpoint
+// and token into well-known local client config files. Only the `vidit`
 // entry is touched; every other server in each file is preserved. JSON files
 // are merged atomically (write-to-temp + rename) and never clobbered when the
 // existing content fails to parse.
@@ -23,7 +23,7 @@ export interface ClientConnectOptions {
 }
 
 const TOKEN_PATTERN = /^[A-Za-z0-9_-]+$/;
-const TOKEN_ENV_VAR = 'OPENCHATCUT_MCP_TOKEN';
+const TOKEN_ENV_VAR = 'VIDIT_MCP_TOKEN';
 const CODEX_BIN_FALLBACKS = ['.local/bin/codex', '/Applications/ChatGPT.app/Contents/Resources/codex'];
 
 function displayPath(baseDir: string, file: string): string {
@@ -82,7 +82,7 @@ async function connectJsonClient(
 ): Promise<{ ok: true; paths: [string] } | MergeFailure> {
   const result = await mergeJsonConfig(file, (root) => {
     const servers = (root.mcpServers as Record<string, unknown> | undefined) ?? {};
-    servers.openchatcut = entry;
+    servers.vidit = entry;
     root.mcpServers = servers;
   });
   if (!result.ok) return result;
@@ -91,7 +91,7 @@ async function connectJsonClient(
 
 function runCodex(bin: string, endpoint: string, env: NodeJS.ProcessEnv): Promise<{ code: number | null; stderr: string }> {
   return new Promise((resolve) => {
-    const child = spawn(bin, ['mcp', 'add', 'openchatcut', '--url', endpoint, '--bearer-token-env-var', TOKEN_ENV_VAR], { env });
+    const child = spawn(bin, ['mcp', 'add', 'vidit', '--url', endpoint, '--bearer-token-env-var', TOKEN_ENV_VAR], { env });
     let stderr = '';
     const timer = setTimeout(() => child.kill('SIGKILL'), 15_000);
     child.stderr.on('data', (chunk: Buffer) => {
@@ -127,13 +127,13 @@ async function connectCodex(endpoint: string, token: string, baseDir: string, co
           /* first connection - file does not exist yet */
         }
         const lines = text.split('\n');
-        const idx = lines.findIndex((line) => /^\s*(export\s+)?OPENCHATCUT_MCP_TOKEN=/.test(line));
+        const idx = lines.findIndex((line) => /^\s*(export\s+)?VIDIT_MCP_TOKEN=/.test(line));
         if (idx >= 0) {
           if (lines[idx].trim() !== wanted) lines[idx] = wanted;
           await writeAtomic(zshrc, lines.join('\n'));
         } else {
           const suffix = text && !text.endsWith('\n') ? '\n' : '';
-          await writeAtomic(zshrc, `${text}${suffix}# OpenChatCut MCP token (added by OpenChatCut)\n${wanted}\n`);
+          await writeAtomic(zshrc, `${text}${suffix}# Vidit MCP token (added by Vidit)\n${wanted}\n`);
         }
       } catch (error) {
         return { ok: false, error: 'config-write-error', detail: error instanceof Error ? error.message : String(error) };

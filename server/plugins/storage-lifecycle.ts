@@ -8,7 +8,7 @@ import { initializeSqliteProjectStore } from '../storage/sqlite-store.ts';
  */
 export function storageLifecyclePlugin(): Plugin {
   return {
-    name: 'openchatcut-storage-lifecycle',
+    name: 'vidit-storage-lifecycle',
     async configureServer(server) {
       try {
         const status = await initializeSqliteProjectStore();

@@ -163,7 +163,7 @@ async function copilotStatus(): Promise<CopilotAgentStatus> {
       account: null,
       error: error instanceof CopilotProcessError
         ? error.message
-        : 'Copilot CLI is unavailable. Restart OpenChatCut and try again.',
+        : 'Copilot CLI is unavailable. Restart Vidit and try again.',
     };
   }
 }
@@ -318,7 +318,7 @@ function handleFailure(res: ServerResponse, error: unknown): void {
 
 export function copilotAgentPlugin(): Plugin {
   return {
-    name: 'openchatcut-copilot-agent',
+    name: 'vidit-copilot-agent',
     configureServer(server) {
       server.middlewares.use('/api/copilot', (req, res) => {
         void handleCopilotRequest(req, res).catch((error) => handleFailure(res, error));

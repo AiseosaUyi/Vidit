@@ -129,7 +129,7 @@ export async function handleExternalAgentBridge(
 
 export function externalAgentPlugin(): Plugin {
   return {
-    name: 'openchatcut-external-agent',
+    name: 'vidit-external-agent',
     configureServer(server) {
       server.middlewares.use('/api/external-agent', (req, res) => {
         void handleExternalAgentBridge(req, res).catch((error) => {
@@ -138,7 +138,7 @@ export function externalAgentPlugin(): Plugin {
       });
       server.middlewares.use('/api/external-mcp/mcp', (req, res) => {
         if (!externalMcpAuthorized(req)) {
-          sendBridgeJson(res, 401, { error: 'invalid OpenChatCut MCP token' });
+          sendBridgeJson(res, 401, { error: 'invalid Vidit MCP token' });
           return;
         }
         void handleMcpRequest(req, res, requestBaseUrl(req)).catch((error) => {

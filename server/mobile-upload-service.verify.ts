@@ -10,7 +10,7 @@ assert.equal(isLoopbackAddress('::1'), true);
 assert.equal(isLoopbackAddress('::ffff:127.0.0.1'), true);
 assert.equal(isLoopbackAddress('192.168.1.20'), false);
 
-const tempDir = await mkdtemp(join(tmpdir(), 'openchatcut-mobile-upload-'));
+const tempDir = await mkdtemp(join(tmpdir(), 'vidit-mobile-upload-'));
 const service = new MobileUploadService({
   bindHost: '127.0.0.1',
   addresses: () => ['127.0.0.1'],
@@ -27,7 +27,7 @@ try {
   const page = await fetch(session.urls[0]!);
   assert.equal(page.status, 200);
   assert.match(page.headers.get('content-security-policy') ?? '', /default-src 'self'/);
-  assert.match(await page.text(), /OpenChatCut/);
+  assert.match(await page.text(), /Vidit/);
 
   const pngBytes = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
   const uploaded = await fetch(`${session.urls[0]}/upload?name=${encodeURIComponent('camera.png')}`, {
@@ -77,11 +77,11 @@ try {
   assert.equal(heic.status, 200);
 
   const englishSession = await service.createSession('en');
-  assert.match(await (await fetch(englishSession.urls[0]!)).text(), /Send media to OpenChatCut/);
+  assert.match(await (await fetch(englishSession.urls[0]!)).text(), /Send media to Vidit/);
   const italianSession = await service.createSession('it');
-  assert.match(await (await fetch(italianSession.urls[0]!)).text(), /Send media to OpenChatCut/);
+  assert.match(await (await fetch(italianSession.urls[0]!)).text(), /Send media to Vidit/);
   const russianSession = await service.createSession('ru');
-  assert.match(await (await fetch(russianSession.urls[0]!)).text(), /Отправить медиафайлы в OpenChatCut/);
+  assert.match(await (await fetch(russianSession.urls[0]!)).text(), /Отправить медиафайлы в Vidit/);
 
   const tooLarge = await fetch(`${session.urls[0]}/upload?name=large.mp4`, {
     method: 'POST',

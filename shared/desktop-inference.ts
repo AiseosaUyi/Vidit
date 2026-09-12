@@ -6,15 +6,15 @@ import {
 } from './vector-inference-contract.ts';
 
 export const DESKTOP_INFERENCE_CHANNELS = {
-  capabilities: 'openchatcut:inference-capabilities',
-  setEnabled: 'openchatcut:inference-set-enabled',
-  preloadAsr: 'openchatcut:inference-preload-asr',
-  transcribe: 'openchatcut:inference-transcribe',
-  semantic: 'openchatcut:inference-semantic',
-  clap: 'openchatcut:inference-clap',
-  rhythm: 'openchatcut:inference-rhythm',
-  cancel: 'openchatcut:inference-cancel',
-  progress: 'openchatcut:inference-progress',
+  capabilities: 'vidit:inference-capabilities',
+  setEnabled: 'vidit:inference-set-enabled',
+  preloadAsr: 'vidit:inference-preload-asr',
+  transcribe: 'vidit:inference-transcribe',
+  semantic: 'vidit:inference-semantic',
+  clap: 'vidit:inference-clap',
+  rhythm: 'vidit:inference-rhythm',
+  cancel: 'vidit:inference-cancel',
+  progress: 'vidit:inference-progress',
 } as const;
 
 export type DesktopInferenceBackend = 'coreml' | 'cuda' | 'directml' | 'native-cpu' | 'native-metal';
@@ -235,8 +235,8 @@ function validSourcePath(value: unknown): value is string {
   if (typeof value !== 'string' || value.length === 0 || value.length > MAX_SOURCE_PATH
     || !value.startsWith('/media/uploads/') || value.includes('\\')) return false;
   try {
-    const parsed = new URL(value, 'http://openchatcut.local');
-    return parsed.origin === 'http://openchatcut.local'
+    const parsed = new URL(value, 'http://vidit.local');
+    return parsed.origin === 'http://vidit.local'
       && parsed.search === ''
       && parsed.hash === ''
       && /^\/media\/uploads\/[^/]+$/.test(parsed.pathname);

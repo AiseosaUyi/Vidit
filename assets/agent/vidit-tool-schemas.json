@@ -1524,7 +1524,7 @@
           },
           "stream": {
             "type": "boolean",
-            "description": "MiniMax HTTP streaming transport. OpenChatCut consumes it server-side and saves one durable audio asset."
+            "description": "MiniMax HTTP streaming transport. Vidit consumes it server-side and saves one durable audio asset."
           },
           "excludeAggregatedAudio": {
             "type": "boolean",
@@ -1800,7 +1800,7 @@
           },
           "stream": {
             "type": "boolean",
-            "description": "Mureka only. Enable provider streaming phase; OpenChatCut still saves durable final files."
+            "description": "Mureka only. Enable provider streaming phase; Vidit still saves durable final files."
           },
           "styles": {
             "type": "array",
@@ -2259,7 +2259,7 @@
     },
     {
       "name": "browse_library",
-      "description": "Browse the OpenChatCut Library (not the user media pool). Categories match Library tabs: motion-graphics, luts, zoom, fx, audio-fx, sound-effects, transitions. Modes: (1) category only → group overview; (2) category+group or query → list of id/name/description; (3) id → full detail + edit_item usage. After discovery, place with edit_item (effect/transition/zoom/audio).",
+      "description": "Browse the Vidit Library (not the user media pool). Categories match Library tabs: motion-graphics, luts, zoom, fx, audio-fx, sound-effects, transitions. Modes: (1) category only → group overview; (2) category+group or query → list of id/name/description; (3) id → full detail + edit_item usage. After discovery, place with edit_item (effect/transition/zoom/audio).",
       "input_schema": {
         "type": "object",
         "properties": {
@@ -2487,7 +2487,7 @@
           },
           "projectId": {
             "type": "string",
-            "description": "Ignored because OpenChatCut uses the active project."
+            "description": "Ignored because Vidit uses the active project."
           }
         },
         "required": [
@@ -2543,7 +2543,7 @@
           },
           "projectId": {
             "type": "string",
-            "description": "Ignored because OpenChatCut uses the active project."
+            "description": "Ignored because Vidit uses the active project."
           }
         },
         "required": [
@@ -2879,7 +2879,7 @@
     },
     {
       "name": "auto_reframe",
-      "description": "Auto-reframe a video clip: sample its frames, detect the subject/focal point per interval, and write reframe keyframes (builtin:zoom __openchatcutReframeCurve) so the crop window follows the subject when the canvas aspect differs (e.g. 16:9→9:16). Clears the clip's existing reframe keyframes first, then re-detects. Browser-only (needs the actual video pixels); returns an error if run headless or if the target isn't a video with a source.",
+      "description": "Auto-reframe a video clip: sample its frames, detect the subject/focal point per interval, and write reframe keyframes (builtin:zoom __viditReframeCurve) so the crop window follows the subject when the canvas aspect differs (e.g. 16:9→9:16). Clears the clip's existing reframe keyframes first, then re-detects. Browser-only (needs the actual video pixels); returns an error if run headless or if the target isn't a video with a source.",
       "input_schema": {
         "type": "object",
         "properties": {
@@ -3910,7 +3910,7 @@
     },
     {
       "name": "list_projects",
-      "description": "List OpenChatCut projects this browser owns (id, name, updatedAt, editorUrl), newest first. Discovery only — does not retarget the editor. Call target_project before editing another project. Pass includeDeleted=true to also list soft-deleted projects for restore_project.",
+      "description": "List Vidit projects this browser owns (id, name, updatedAt, editorUrl), newest first. Discovery only — does not retarget the editor. Call target_project before editing another project. Pass includeDeleted=true to also list soft-deleted projects for restore_project.",
       "input_schema": {
         "type": "object",
         "properties": {
@@ -4385,7 +4385,7 @@
     },
     {
       "name": "load_skill",
-      "description": "Load one bundled or selected custom skill under the active model round input budget. Omit selectors for SKILL.md; if it is paged, follow nextOffset until null before support files. Exactly one selector per call: either files=[...] to load whole omitted files, or file with offset and limit to page a single file. Never send file and files in the same call. Bundled skills: ai-cinematic-short-film, asset-import, batch-montage-variants, beat-sync-montage, create-motion-graphics, ecommerce-product-montage, explainer-video, export, image-gen, known-errors, livestream-to-clips, long-video-to-shorts, motion-graphic-placement, multi-clips-to-reels, music, music-intelligence, news-rough-cut, openchatcut-plugin-basics, product-ad-video-script, product-help, shader-gen, skill-creator, storyboard-shot-breakdown, talking-head-guide, transcription, verification, video-gen, video-thumbnail-generator, voice, widget-forms.",
+      "description": "Load one bundled or selected custom skill under the active model round input budget. Omit selectors for SKILL.md; if it is paged, follow nextOffset until null before support files. Exactly one selector per call: either files=[...] to load whole omitted files, or file with offset and limit to page a single file. Never send file and files in the same call. Bundled skills: ai-cinematic-short-film, asset-import, batch-montage-variants, beat-sync-montage, create-motion-graphics, ecommerce-product-montage, explainer-video, export, image-gen, known-errors, livestream-to-clips, long-video-to-shorts, motion-graphic-placement, multi-clips-to-reels, music, music-intelligence, news-rough-cut, product-ad-video-script, product-help, shader-gen, skill-creator, storyboard-shot-breakdown, talking-head-guide, transcription, verification, video-gen, video-thumbnail-generator, vidit-plugin-basics, voice, widget-forms.",
       "input_schema": {
         "type": "object",
         "properties": {
@@ -4425,7 +4425,7 @@
     },
     {
       "name": "install_skill",
-      "description": "从 GitHub 安装一个 skill 仓库到本机技能目录（~/.openchatcut/skills/<slug>/），完整安装 SKILL.md 及其 references/scripts/assets/examples。安装后资源库「技能」面板会自动展示，可用 /skill:<slug> 或面板激活。repo 支持 GitHub URL 或 owner/repo（如 \"Jane-xiaoer/paper-collage-ad-codex\"）。slug 可选，默认取 SKILL.md 的 name 或仓库名。",
+      "description": "从 GitHub 安装一个 skill 仓库到本机技能目录（~/.vidit/skills/<slug>/），完整安装 SKILL.md 及其 references/scripts/assets/examples。安装后资源库「技能」面板会自动展示，可用 /skill:<slug> 或面板激活。repo 支持 GitHub URL 或 owner/repo（如 \"Jane-xiaoer/paper-collage-ad-codex\"）。slug 可选，默认取 SKILL.md 的 name 或仓库名。",
       "input_schema": {
         "type": "object",
         "properties": {
@@ -5293,7 +5293,7 @@
     },
     {
       "name": "import_timeline",
-      "description": "Import FCPXML 1.x asset-clip timelines or CMX 3600 EDL text into a new editable OpenChatCut timeline. Referenced files must already exist in the current media pool; matching uses asset id, original path, source path, source filename, and asset name. The import preserves track/lane placement, timeline start and duration, source in-point, and file-backed audio clips. Unresolved or ambiguous media aborts the import without changing the project.",
+      "description": "Import FCPXML 1.x asset-clip timelines or CMX 3600 EDL text into a new editable Vidit timeline. Referenced files must already exist in the current media pool; matching uses asset id, original path, source path, source filename, and asset name. The import preserves track/lane placement, timeline start and duration, source in-point, and file-backed audio clips. Unresolved or ambiguous media aborts the import without changing the project.",
       "input_schema": {
         "type": "object",
         "properties": {
@@ -5696,7 +5696,7 @@
     },
     {
       "name": "browse_library",
-      "description": "Browse the OpenChatCut Library (not the user media pool). Categories match Library tabs: motion-graphics, luts, zoom, fx, audio-fx, sound-effects, transitions. Modes: (1) category only → group overview; (2) category+group or query → list of id/name/description; (3) id → full detail + edit_item usage. After discovery, place with edit_item (effect/transition/zoom/audio).",
+      "description": "Browse the Vidit Library (not the user media pool). Categories match Library tabs: motion-graphics, luts, zoom, fx, audio-fx, sound-effects, transitions. Modes: (1) category only → group overview; (2) category+group or query → list of id/name/description; (3) id → full detail + edit_item usage. After discovery, place with edit_item (effect/transition/zoom/audio).",
       "input_schema": {
         "type": "object",
         "properties": {
@@ -5879,7 +5879,7 @@
     },
     {
       "name": "load_skill",
-      "description": "Load one bundled or selected custom skill under the active model round input budget. Omit selectors for SKILL.md; if it is paged, follow nextOffset until null before support files. Exactly one selector per call: either files=[...] to load whole omitted files, or file with offset and limit to page a single file. Never send file and files in the same call. Bundled skills: ai-cinematic-short-film, asset-import, batch-montage-variants, beat-sync-montage, create-motion-graphics, ecommerce-product-montage, explainer-video, export, image-gen, known-errors, livestream-to-clips, long-video-to-shorts, motion-graphic-placement, multi-clips-to-reels, music, music-intelligence, news-rough-cut, openchatcut-plugin-basics, product-ad-video-script, product-help, shader-gen, skill-creator, storyboard-shot-breakdown, talking-head-guide, transcription, verification, video-gen, video-thumbnail-generator, voice, widget-forms.",
+      "description": "Load one bundled or selected custom skill under the active model round input budget. Omit selectors for SKILL.md; if it is paged, follow nextOffset until null before support files. Exactly one selector per call: either files=[...] to load whole omitted files, or file with offset and limit to page a single file. Never send file and files in the same call. Bundled skills: ai-cinematic-short-film, asset-import, batch-montage-variants, beat-sync-montage, create-motion-graphics, ecommerce-product-montage, explainer-video, export, image-gen, known-errors, livestream-to-clips, long-video-to-shorts, motion-graphic-placement, multi-clips-to-reels, music, music-intelligence, news-rough-cut, product-ad-video-script, product-help, shader-gen, skill-creator, storyboard-shot-breakdown, talking-head-guide, transcription, verification, video-gen, video-thumbnail-generator, vidit-plugin-basics, voice, widget-forms.",
       "input_schema": {
         "type": "object",
         "properties": {

@@ -162,7 +162,7 @@ try {
     body: '{',
   });
   assert.equal(invalidJson.status, 400, 'MCP POST JSON is parsed before transport dispatch');
-  const boundA = await connectClient(mcpUrl, 'openchatcut-mcp-binding-a');
+  const boundA = await connectClient(mcpUrl, 'vidit-mcp-binding-a');
   clients.push(boundA);
   let notify!: () => void;
   const changed = new Promise<void>((resolve) => { notify = resolve; });
@@ -174,9 +174,9 @@ try {
     new Promise((_, reject) => setTimeout(() => reject(new Error('tools/list_changed timeout')), 30_000)),
   ]);
   assert.ok((await boundA.client.listTools()).tools.some((tool) => tool.name === extraTool.name));
-  const exposureHeaders = { 'x-openchatcut-tool-exposure': 'progressive' };
-  const progressiveA = await connectClient(mcpUrl, 'openchatcut-progressive-a', exposureHeaders);
-  const progressiveB = await connectClient(mcpUrl, 'openchatcut-progressive-b', exposureHeaders);
+  const exposureHeaders = { 'x-vidit-tool-exposure': 'progressive' };
+  const progressiveA = await connectClient(mcpUrl, 'vidit-progressive-a', exposureHeaders);
+  const progressiveB = await connectClient(mcpUrl, 'vidit-progressive-b', exposureHeaders);
   clients.push(progressiveA, progressiveB);
   const initialProgressive = await progressiveA.client.listTools();
   assert.equal(initialProgressive.tools.some((tool) => tool.name === 'ToolSearch'), true);
@@ -244,7 +244,7 @@ try {
     mcpSessionsForTest().find((session) => session.id === boundA.sessionId)?.binding,
     { projectId: projectA, editorInstanceId: editorA, baseRevision: revisionA },
   );
-  const boundB = await connectClient(mcpUrl, 'openchatcut-mcp-binding-b');
+  const boundB = await connectClient(mcpUrl, 'vidit-mcp-binding-b');
   clients.push(boundB);
   assert.notEqual((await boundB.client.callTool({
     name: 'target_project',
@@ -260,7 +260,7 @@ try {
 
   registerEditor(projectA, editorA, 'v2-mcp-project-a', editorTools);
   const staleSession = await boundA.client.callTool({
-    name: 'openchatcut_status',
+    name: 'vidit_status',
     arguments: {},
   });
   assert.equal(staleSession.isError, true);
@@ -269,7 +269,7 @@ try {
   // with a session-not-found error instead of returning another stale result.
   registerEditor(projectA, editorA, revisionA, editorTools);
   await assert.rejects(
-    boundA.client.callTool({ name: 'openchatcut_status', arguments: {} }),
+    boundA.client.callTool({ name: 'vidit_status', arguments: {} }),
     (error: unknown) => error instanceof Error && /session not found or expired/i.test(error.message),
     'a stale transport is closed and its session is evicted',
   );
@@ -279,7 +279,7 @@ try {
     'stale transport session is removed from the sessions map',
   );
 
-  const switchClient = await connectClient(mcpUrl, 'openchatcut-mcp-switch');
+  const switchClient = await connectClient(mcpUrl, 'vidit-mcp-switch');
   clients.push(switchClient);
   await switchClient.client.callTool({
     name: 'target_project',
@@ -297,7 +297,7 @@ try {
   assert.equal(pendingEditorCallsForTest(switchClient.sessionId).length, 0);
 
   registerEditor(projectA, editorA, 'v3-mcp-project-a', editorTools);
-  const closeClientConnection = await connectClient(mcpUrl, 'openchatcut-mcp-close');
+  const closeClientConnection = await connectClient(mcpUrl, 'vidit-mcp-close');
   clients.push(closeClientConnection);
   await closeClientConnection.client.callTool({
     name: 'target_project',
@@ -326,7 +326,7 @@ try {
     editorTools,
   });
 
-  const expiredClient = await connectClient(mcpUrl, 'openchatcut-mcp-expired');
+  const expiredClient = await connectClient(mcpUrl, 'vidit-mcp-expired');
   clients.push(expiredClient);
   setMcpSessionLastUsedForTest(
     expiredClient.sessionId,
@@ -344,7 +344,7 @@ try {
   await resetMcpSessionsForTest();
   const cappedClients: ConnectedClient[] = [];
   for (let index = 0; index < MCP_SESSION_COUNT_LIMIT; index += 1) {
-    cappedClients.push(await connectClient(mcpUrl, `openchatcut-mcp-cap-${index}`));
+    cappedClients.push(await connectClient(mcpUrl, `vidit-mcp-cap-${index}`));
   }
   await cappedClients[1].client.callTool({
     name: 'target_project',
@@ -363,7 +363,7 @@ try {
     200,
     'a live request updates session lastUsed',
   );
-  cappedClients.push(await connectClient(mcpUrl, 'openchatcut-mcp-cap-overflow'));
+  cappedClients.push(await connectClient(mcpUrl, 'vidit-mcp-cap-overflow'));
   clients.push(...cappedClients);
   const cappedOutcome = await Promise.race([
     cappedTerminal,

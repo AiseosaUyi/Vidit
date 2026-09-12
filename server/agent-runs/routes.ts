@@ -36,7 +36,7 @@ import {
 import { CursorProtocolError, resolveCursor, sseForRun } from './sse';
 import { projectStoreHttpAuthorized, projectStoreReadAuthorized } from '../project-store-http-auth';
 const MAX_TOOL_RESULT_BODY_BYTES = 1024 * 1024;
-const SERVER_RUN_CAPABILITY_HEADER = 'x-openchatcut-run-capability';
+const SERVER_RUN_CAPABILITY_HEADER = 'x-vidit-run-capability';
 const SERVER_RUN_ADMISSION_TIMEOUT_MS = 60_000;
 interface DeferredRun {
   readonly input: ServerRunInput;
@@ -459,7 +459,7 @@ export interface AgentRunsPluginOptions {
 
 export function agentRunsPlugin(options: AgentRunsPluginOptions = {}): Plugin {
   return {
-    name: 'openchatcut-agent-runs',
+    name: 'vidit-agent-runs',
     configureServer(server) {
       (options.activatePersistence ?? activateOfflineAgentRuntimeBackend)();
       server.middlewares.use('/api/agent-runs', async (req, res) => {

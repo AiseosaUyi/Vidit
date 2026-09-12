@@ -287,7 +287,7 @@ export function soundGenerationPlugin(options: SoundOptions): Plugin {
     snapshot.resultUrls,
   ));
   return {
-    name: 'openchatcut-sound-generation',
+    name: 'vidit-sound-generation',
     configureServer(server) {
       server.middlewares.use('/generate/sound', async (req, res) => {
         if (req.method !== 'POST') { sendJson(res, 405, { error: 'method not allowed — use POST' }); return; }
