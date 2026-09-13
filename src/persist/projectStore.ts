@@ -1,5 +1,6 @@
 export { loadProjectThumb, saveProjectThumb } from './projectThumbStore';
 import type { ProjectDoc, TimelineState } from '../editor/types';
+import { getLocale } from '../i18n/locale';
 import type { LlmProvider } from '../../shared/llm-providers';
 import { CURRENT_PROJECT_VERSION } from '../../shared/project-version';
 import {
@@ -486,10 +487,14 @@ const newId = () =>
     ? crypto.randomUUID()
     : `p_${now().toString(36)}_${Math.floor(Math.random() * 1e6).toString(36)}`;
 
-// Auto-name new empty projects with a generated adjective/noun combination.
-const ADJ = ['流光', '静默', '暖阳', '深蓝', '轻盈', '锋利', '柔和', '斑斓', '清冽', '灼热', '朦胧', '澄澈'];
-const NOUN = ['序曲', '航迹', '棱镜', '潮汐', '织机', '回响', '飞羽', '砂丘', '苔原', '穹顶', '流域', '星图'];
+// Auto-name new empty projects with a generated adjective/noun combination,
+// picked in the user's current UI language (getLocale()) rather than always Chinese.
+const ADJ_ZH = ['流光', '静默', '暖阳', '深蓝', '轻盈', '锋利', '柔和', '斑斓', '清冽', '灼热', '朦胧', '澄澈'];
+const NOUN_ZH = ['序曲', '航迹', '棱镜', '潮汐', '织机', '回响', '飞羽', '砂丘', '苔原', '穹顶', '流域', '星图'];
+const ADJ_EN = ['Flowing', 'Silent', 'Sunlit', 'Deep Blue', 'Weightless', 'Sharp', 'Soft', 'Vivid', 'Crisp', 'Scorching', 'Hazy', 'Clear'];
+const NOUN_EN = ['Prelude', 'Wake', 'Prism', 'Tide', 'Loom', 'Echo', 'Feather', 'Dune', 'Tundra', 'Dome', 'Basin', 'Starmap'];
 export function randomProjectName(): string {
   const pick = (a: string[]) => a[Math.floor(Math.random() * a.length)];
-  return `${pick(ADJ)}${pick(NOUN)}`;
+  const [adj, noun] = getLocale() === 'zh' ? [ADJ_ZH, NOUN_ZH] : [ADJ_EN, NOUN_EN];
+  return getLocale() === 'zh' ? `${pick(adj)}${pick(noun)}` : `${pick(adj)} ${pick(noun)}`;
 }
