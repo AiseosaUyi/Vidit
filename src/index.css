@@ -216,6 +216,27 @@ button, input, select { font: inherit; }
   .cc-topbar-title { display:none !important; }
 }
 
+/* Stack the desktop 5-column editor grid into a single scrollable column on
+ * narrow/tablet-portrait viewports. Switching to flex makes every child's
+ * gridColumn/gridRow inline style inert, so `order` alone controls the
+ * stacked sequence instead of juggling !important grid-line overrides. */
+@media (max-width:860px) {
+  .cc-editor-shell {
+    display:flex !important;
+    flex-direction:column !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+  }
+  .cc-shell-divider-slot { display:none !important; }
+  .cc-preview-workspace { order:1; width:100%; height:46vh; flex-shrink:0; }
+  .cc-timeline-workspace { order:2; width:100%; height:260px; flex-shrink:0; }
+  .cc-library-workspace { order:3; width:100%; height:320px; flex-shrink:0; }
+  .cc-chat-panel {
+    order:4; width:100% !important; min-width:0 !important; height:320px; flex-shrink:0;
+    border-right:0 !important; border-top:0.5px solid var(--cc-border);
+  }
+}
+
 /* Vendor marks have mixed source viewBoxes; normalize both the host and its inline SVG. */
 .cc-vendor-icon { display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; line-height:0; overflow:hidden; }
 .cc-vendor-icon svg { display:block; width:100%; height:100%; fill:currentColor; }
@@ -922,7 +943,7 @@ button, input, select { font: inherit; }
 /* The ruler is fixed at the top of the vertical scroll area; the track head is only fixed at the left side of the horizontal direction. Playhead z13 remains above the ruler.
    The sticky header must cover the absolute positioner in the scrolling content (selection z5 / snap line):
    Otherwise, the play head will be drawn above the track head after horizontal scrolling (actual measurement: the pointer runs into the left head area after zooming). */
-.cc-timeline-ruler { position:sticky; top:0; z-index:12; background:var(--cc-bg); }
+.cc-timeline-ruler { position:sticky; top:0; z-index:12; background:var(--cc-bg); touch-action:none; }
 .cc-ruler-head { position:sticky; left:0; z-index:11; flex-shrink:0; display:flex; align-items:center; justify-content:center; border-right:0.5px solid var(--cc-border); background:var(--cc-panel); }
 .cc-ruler-head span { color:rgba(var(--cc-ink-rgb), 0.61); font-size:14px; letter-spacing:.03em; font-variant-numeric:tabular-nums; }
 .cc-playhead { width:1px; background:var(--cc-accent); box-shadow:0 0 0 0.5px rgba(var(--cc-shadow-rgb), 0.45); }
@@ -944,6 +965,7 @@ button, input, select { font: inherit; }
   box-sizing:border-box;
   border:1px solid color-mix(in srgb, var(--cc-text-strong) 14%, transparent);
   transition:border-color 120ms cubic-bezier(.25,1,.5,1), box-shadow 120ms cubic-bezier(.25,1,.5,1);
+  touch-action:none;
 }
 .cc-timeline-clip:hover { border-color:color-mix(in srgb, var(--cc-text-strong) 42%, transparent); }
 .cc-timeline-clip.is-selected {

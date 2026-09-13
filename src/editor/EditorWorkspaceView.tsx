@@ -39,7 +39,7 @@ export interface EditorWorkspaceViewProps {
 
 function renderLibrary(props: EditorWorkspaceViewProps) {
   return (
-    <div style={{ gridColumn: 3, gridRow: 2, minHeight: 0, minWidth: 0, overflow: 'hidden' }}>
+    <div className="cc-library-workspace" style={{ gridColumn: 3, gridRow: 2, minHeight: 0, minWidth: 0, overflow: 'hidden' }}>
       <LibraryPanel {...props.libraryPanel} />
     </div>
   );
@@ -56,7 +56,7 @@ function renderPreview(props: EditorWorkspaceViewProps) {
 
 function renderTimeline(props: EditorWorkspaceViewProps) {
   return (
-    <div style={{ gridColumn: '3 / -1', gridRow: 4, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'hidden' }}>
+    <div className="cc-timeline-workspace" style={{ gridColumn: '3 / -1', gridRow: 4, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'hidden' }}>
       <TimelineTabs {...props.timelineTabs} />
       <Timeline {...props.timeline} />
     </div>
@@ -90,15 +90,15 @@ export function EditorWorkspaceView(props: EditorWorkspaceViewProps) {
         {props.shortcutsDialog && <ShortcutsDialog {...props.shortcutsDialog} />}
       </Suspense>
       <ChatPanel {...props.chatPanel} />
-      <div style={{ gridColumn: 2, gridRow: '2 / 5' }}>
+      <div className="cc-shell-divider-slot" style={{ gridColumn: 2, gridRow: '2 / 5' }}>
         {!props.chatCollapsed && <Divider onResize={props.onResizeChat} />}
       </div>
       {renderLibrary(props)}
-      <div style={{ gridColumn: 4, gridRow: 2 }}>
+      <div className="cc-shell-divider-slot" style={{ gridColumn: 4, gridRow: 2 }}>
         <Divider onResize={props.onResizeLibrary} />
       </div>
       {renderPreview(props)}
-      <div style={{ gridColumn: '3 / -1', gridRow: 3 }}>
+      <div className="cc-shell-divider-slot" style={{ gridColumn: '3 / -1', gridRow: 3 }}>
         <Divider orientation="horizontal" onResize={props.onResizeTimeline} />
       </div>
       {renderTimeline(props)}
