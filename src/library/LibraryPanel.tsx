@@ -23,6 +23,7 @@ import { TransitionThumb } from './TransitionThumb';
 import { FxThumb } from './FxThumb';
 import { ZoomThumb } from './ZoomThumb';
 import { SoundBrowser } from './SoundBrowser';
+import { StockBrowser } from './StockBrowser';
 import { EnvelopeThumb } from './PluginBrowser';
 import { asPluginZoom, pluginResourceItems, usePluginPacks } from './pluginResources';
 import { ExtensionCenter } from './ExtensionCenter';
@@ -119,7 +120,7 @@ interface LibraryPanelProps {
 }
 
 const MAIN_TABS = ['我的素材', '序列', '资源库', '文字稿', '字幕', '技能'] as const;
-const SUB_TABS = ['MG 动画', '音效', '转场', '特效', '缩放', 'LUT'] as const;
+const SUB_TABS = ['MG 动画', '素材库', '音效', '转场', '特效', '缩放', 'LUT'] as const;
 function localizeDefaultSequenceName(name: string, t: ReturnType<typeof useT>): string {
   const match = /^序列 (\d+)$/.exec(name);
   return match ? t('序列 {n}', { n: match[1]! }) : name;
@@ -158,6 +159,7 @@ export function LibraryPanel({ semanticScopeId, templates, onAddTemplate, onAddA
   };
   // Audio transition: The source catalog has no independent entries and the false entry has been hidden (§4.2)
   const showSfx = mainTab === '资源库' && subTab === '音效';     // sound effects
+  const showStock = mainTab === '资源库' && subTab === '素材库'; // free stock photo/video search
   const isTranscript = mainTab === '文字稿';
   const isCaptions = mainTab === '字幕';
   const isMyAssets = mainTab === '我的素材';
@@ -273,6 +275,8 @@ export function LibraryPanel({ semanticScopeId, templates, onAddTemplate, onAddA
           <TemplateBrowser templates={templates} onAdd={onAddTemplate} onUseAI={onUseTemplateAI} />
         ) : showSfx ? (
           <SoundBrowser fps={fps} onAdd={onAddAudio} />
+        ) : showStock ? (
+          <StockBrowser fps={fps} onAdd={onAddMediaItem} />
         ) : subTab === '转场' ? (
           <div className="cc-transition-browser">
             {/* Audio crossfade — trAudioCrossFade; highlighting available when audio clip is selected*/}
