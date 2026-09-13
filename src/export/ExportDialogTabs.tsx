@@ -19,6 +19,7 @@ import type { ExportQaUiState, ExportTab } from './useExportWorkflow';
 import { fcpxmlBackgroundFillCount } from './fcpxml';
 import { loadJianYingDraftPreference, saveJianYingDraftPreference, type JianYingDraftStore } from './jianyingDraftPreference';
 import { useState } from 'react';
+import { aspectOf, PLATFORM_PRESETS } from './platformPresets';
 
 /** macOS default store for the Chinese JianYing (剪映专业版) app; drafts in 6.0+
  * are encrypted and capcut-cli cannot decrypt them, hence the ≤5.9 note. */
@@ -39,8 +40,44 @@ interface VideoSettingsProps {
 
 function VideoSettings({ video, busy, qualityMode, setQualityMode }: VideoSettingsProps) {
   const t = useT();
+  const [activePresetId, setActivePresetId] = useState<string | null>(null);
+  const activePreset = PLATFORM_PRESETS.find((preset) => preset.id === activePresetId) ?? null;
+  const currentAspect = aspectOf(video.dimensions.width, video.dimensions.height);
+  const applyPreset = (id: string) => {
+    const preset = PLATFORM_PRESETS.find((p) => p.id === id);
+    if (!preset) return;
+    video.setCodec('h264');
+    video.setResolution(preset.resolution);
+    video.setFps(preset.fps);
+    video.setBitrateMode(preset.bitrateMode);
+    setActivePresetId(id);
+  };
   return (
     <>
+      <Row label={t('一键预设')}>
+        <div className="cc-export-segmented">
+          {PLATFORM_PRESETS.map((preset) => (
+            <button
+              type="button"
+              key={preset.id}
+              className={`cc-export-seg${preset.id === activePresetId ? ' active' : ''}`}
+              aria-pressed={preset.id === activePresetId}
+              onClick={() => applyPreset(preset.id)}
+              disabled={busy}
+            >
+              {preset.label}
+            </button>
+          ))}
+        </div>
+      </Row>
+      {activePreset && activePreset.aspect !== currentAspect && (
+        <p className="cc-export-footnote">
+          {t('{platform} 推荐画幅 {aspect}，当前项目画幅不同——先在时间线右下角切换画幅比例，再导出效果更好。', {
+            platform: activePreset.label,
+            aspect: activePreset.aspectLabel,
+          })}
+        </p>
+      )}
       <Row label={t('画质策略')}>
         <Segmented
           options={[
