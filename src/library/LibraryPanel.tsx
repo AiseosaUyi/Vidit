@@ -24,6 +24,7 @@ import { FxThumb } from './FxThumb';
 import { ZoomThumb } from './ZoomThumb';
 import { SoundBrowser } from './SoundBrowser';
 import { StockBrowser } from './StockBrowser';
+import { EFFECT_COMBOS } from './effectCombos';
 import { EnvelopeThumb } from './PluginBrowser';
 import { asPluginZoom, pluginResourceItems, usePluginPacks } from './pluginResources';
 import { ExtensionCenter } from './ExtensionCenter';
@@ -114,7 +115,7 @@ interface LibraryPanelProps {
   selectedItem: TimelineItem | null;
   /** custom = plugin transition (type='custom-shader' snapshot frag into TransitionItem) */
   onApplyTransition: (type: TransitionType, custom?: { frag: string; uniforms: Record<string, number>; label: string }) => void;
-  onApplyFx: (assetId: string) => void;
+  onApplyFx: (assetId: string | string[]) => void;
   /** The built-in curve passes {shape}; the plugin curve passes {envelope, label} (see PluginBrowser.asPluginZoom) */
   onApplyZoom: (zoom: ZoomEffect) => void;
 }
@@ -309,15 +310,36 @@ export function LibraryPanel({ semanticScopeId, templates, onAddTemplate, onAddA
             />
           </div>
         ) : subTab === '特效' ? (
-          <ResourceBrowser
-            layout="grid"
-            dragKind="fx"
-            hint="悬停预览 · 点击应用到选中视频/图片"
-            items={fxItems}
-            applicable={selKind === 'video' || selKind === 'image'}
-            onApply={(id) => onApplyFx(id)}
-            renderThumb={(id, hovered) => <FxThumb assetId={id} playing={hovered} />}
-          />
+          <div>
+            <div style={{ marginBottom: 14 }}>
+              <div style={{ fontSize: 11, color: theme.textDim, margin: '0 4px 8px', letterSpacing: 0.3 }}>
+                {t('组合预设 · 一键叠加多个特效')}
+              </div>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                {EFFECT_COMBOS.map((combo) => (
+                  <button
+                    key={combo.id}
+                    type="button"
+                    className="cc-sound-chip"
+                    style={isVisual ? undefined : { opacity: 0.45, cursor: 'not-allowed' }}
+                    disabled={!isVisual}
+                    onClick={() => onApplyFx(combo.effectIds)}
+                  >
+                    {t(combo.label)}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <ResourceBrowser
+              layout="grid"
+              dragKind="fx"
+              hint="悬停预览 · 点击应用到选中视频/图片"
+              items={fxItems}
+              applicable={selKind === 'video' || selKind === 'image'}
+              onApply={(id) => onApplyFx(id)}
+              renderThumb={(id, hovered) => <FxThumb assetId={id} playing={hovered} />}
+            />
+          </div>
         ) : subTab === '缩放' ? (
           <ResourceBrowser
             layout="grid"
