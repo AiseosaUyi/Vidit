@@ -126,8 +126,8 @@ importers:
         specifier: ^1.12.1
         version: 1.12.1
       onnxruntime-node:
-        specifier: 1.22.0
-        version: 1.22.0
+        specifier: 1.24.3
+        version: 1.24.3
       onnxruntime-web:
         specifier: 1.29.0
         version: 1.29.0
@@ -3232,9 +3232,6 @@ packages:
     resolution: {integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==}
     engines: {node: '>=6'}
 
-  onnxruntime-common@1.22.0:
-    resolution: {integrity: sha512-vcuaNWgtF2dGQu/EP5P8UI5rEPEYqXG2sPPe5j9lg2TY/biJF8eWklTMwlDO08iuXq48xJo0awqIpK5mPG+IxA==}
-
   onnxruntime-common@1.24.0-dev.20251116-b39e144322:
     resolution: {integrity: sha512-BOoomdHYmNRL5r4iQ4bMvsl2t0/hzVQ3OM3PHD0gxeXu1PmggqBv3puZicEUVOA3AtHHYmqZtjMj9FOfGrATTw==}
 
@@ -3243,10 +3240,6 @@ packages:
 
   onnxruntime-common@1.29.0:
     resolution: {integrity: sha512-/F63/e2VJoaVXGGNu6S5QH7jivBThGO95OzAVXXQ8hTta/b1QxI8udHa6cI3+3mAb5WWIIaMMwfZw01oivjJ1g==}
-
-  onnxruntime-node@1.22.0:
-    resolution: {integrity: sha512-QaAqr7PFekrmEsmu1rpw7OxJYyG+iACjNHoNtQIVt9Oh7st8WDPIIUe6KhF9l35HVJTJd9CV1rePoPmKhSV26g==}
-    os: [win32, darwin, linux]
 
   onnxruntime-node@1.24.3:
     resolution: {integrity: sha512-JH7+czbc8ALA819vlTgcV+Q214/+VjGeBHDjX81+ZCD0PCVCIFGFNtT0V4sXG/1JXypKPgScQcB3ij/hk3YnTg==}
@@ -7446,19 +7439,11 @@ snapshots:
     dependencies:
       mimic-fn: 2.1.0
 
-  onnxruntime-common@1.22.0: {}
-
   onnxruntime-common@1.24.0-dev.20251116-b39e144322: {}
 
   onnxruntime-common@1.24.3: {}
 
   onnxruntime-common@1.29.0: {}
-
-  onnxruntime-node@1.22.0:
-    dependencies:
-      adm-zip: 0.5.18
-      global-agent: 3.0.0
-      onnxruntime-common: 1.22.0
 
   onnxruntime-node@1.24.3:
     dependencies:
