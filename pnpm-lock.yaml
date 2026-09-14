@@ -44,6 +44,12 @@ importers:
       '@ai-sdk/openai-compatible':
         specifier: ^3.0.12
         version: 3.0.14(zod@4.4.3)
+      '@ai-sdk/provider':
+        specifier: ^4.0.5
+        version: 4.0.7
+      '@ai-sdk/provider-utils':
+        specifier: ^5.0.21
+        version: 5.0.28(zod@4.4.3)
       '@ai-sdk/xai':
         specifier: ^4.0.42
         version: 4.0.42(zod@4.4.3)
@@ -107,6 +113,9 @@ importers:
       ajv-formats:
         specifier: ^3.0.1
         version: 3.0.1(ajv@8.20.0)
+      dotenv:
+        specifier: ^16.6.1
+        version: 16.6.1
       electron-updater:
         specifier: ^6.8.9
         version: 6.8.9
@@ -155,6 +164,9 @@ importers:
       sqlite-vec:
         specifier: ^0.1.9
         version: 0.1.9
+      undici:
+        specifier: ^7.29.0
+        version: 7.29.0
     devDependencies:
       '@types/babel__standalone':
         specifier: ^7.1.9
